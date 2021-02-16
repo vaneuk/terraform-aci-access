@@ -9,10 +9,11 @@ GUI Location:
 */
 resource "aci_ranges" "add_vlan" {
   for_each      = local.vlan_list
-  depends_on    = [each.value["vlan_pool_dn"]]
+  alloc_mode    = each.value["alloc_mode"]
   annotation    = each.value["annotation"]
   name_alias    = each.value["name_alias"]
-  vlan_pool_dn  = each.value["vlan_pool_dn"]
-  from          = "vlan-${each.value["vlan"]}"
-  to            = "vlan-${each.value["vlan"]}"
+  vlan_pool_dn  = each.value["vlan_pool"]
+  role          = each.value["role"]
+  from          = "vlan-${each.value["from"]}"
+  to            = "vlan-${each.value["to"]}"
 }

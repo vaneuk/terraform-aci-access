@@ -9,15 +9,13 @@ variable "layer3_domain" {
     name          = optional(string)
     name_alias    = optional(string)
     vlan_pool     = optional(string)
-    vlan_pool_id  = optional(string)
   }))
   default = {
     default = {
       annotation    = ""
       name          = "l3out"
       name_alias    = ""
-      vlan_pool     = "l3out"
-      vlan_pool_id  = "l3out.id"
+      vlan_pool     = ""
     }
   }
 }
@@ -29,7 +27,6 @@ variable "physical_domain" {
     name          = optional(string)
     name_alias    = optional(string)
     vlan_pool     = optional(string)
-    vlan_pool_id  = optional(string)
   }))
   default = {
     default = {
@@ -37,7 +34,6 @@ variable "physical_domain" {
       name          = "access"
       name_alias    = ""
       vlan_pool     = "access"
-      vlan_pool_id  = "access.id"
     }
   }
 }
@@ -48,8 +44,7 @@ locals {
       annotation    = (d.annotation == null ? v.annotation : "")
       name          = coalesce(d.name, "l3out")
       name_alias    = (d.name_alias == null ? v.name_alias : "")
-      vlan_pool     = coalesce(d.vlan_pool_id, "l3out")
-      vlan_pool_id  = coalesce(d.vlan_pool_id, "l3out.id")
+      vlan_pool     = coalesce(d.vlan_pool, "")
     }
   }
   physical_domain = {
@@ -57,8 +52,7 @@ locals {
       annotation    = (d.annotation == null ? v.annotation : "")
       name          = coalesce(d.name, "access")
       name_alias    = (d.name_alias == null ? v.name_alias : "")
-      vlan_pool     = coalesce(d.vlan_pool_id, "access")
-      vlan_pool_id  = coalesce(d.vlan_pool_id, "access.id")
+      vlan_pool     = coalesce(d.vlan_pool, "")
     }
   }
 }

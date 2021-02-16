@@ -16,7 +16,7 @@ variable "vlan_pool" {
       alloc_mode  = "static"
       annotation  = ""
       description = ""
-      name        = "msite"
+      name        = "l3out"
       name_alias  = ""
     }
   }
@@ -28,7 +28,7 @@ locals {
       alloc_mode  = coalesce(v.alloc_mode, "static")
       annotation  = (v.annotation == null ? v.annotation : "")
       description = (v.description == null ? v.description : "")
-      name        = coalesce(v.name, "msite")
+      name        = coalesce(v.name, "l3out")
       name_alias  = (v.name_alias == null ? v.name_alias : "")
     }
   }

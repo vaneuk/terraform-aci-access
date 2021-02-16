@@ -15,7 +15,7 @@ resource "aci_l3_domain_profile" "layer3" {
   annotation                = each.value["annotation"]
   name                      = each.value["name"]
   name_alias                = each.value["name_alias"]
-  relation_infra_rs_vlan_ns = each.value["vlan_pool_id"]
+  relation_infra_rs_vlan_ns = each.value["vlan_pool"].id
 }
 
 #------------------------------------------
@@ -35,5 +35,5 @@ resource "aci_physical_domain" "physical" {
   annotation                = each.value["annotation"]
   name                      = each.value["name"]
   name_alias                = each.value["name_alias"]
-  relation_infra_rs_vlan_ns = each.value["vlan_pool_id"]
+  relation_infra_rs_vlan_ns = each.value["vlan_pool_id"].id
 }

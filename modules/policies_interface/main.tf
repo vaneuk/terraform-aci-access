@@ -124,7 +124,7 @@ resource "aci_miscabling_protocol_interface_policy" "mcp" {
   for_each    = local.mcp
   admin_st    = each.value["admin_state"]
   annotation  = each.value["annotation"]
-  description = each.value["description"]
+  # description = each.value["description"]
   name        = each.value["name"]
   name_alias  = each.value["name_alias"]
 }

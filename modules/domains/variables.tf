@@ -40,19 +40,19 @@ variable "physical_domain" {
 
 locals {
   layer3_domain = {
-    for k, d in var.vlan_pool : k => {
-      annotation    = (d.annotation == null ? v.annotation : "")
-      name          = coalesce(d.name, "l3out")
-      name_alias    = (d.name_alias == null ? v.name_alias : "")
-      vlan_pool     = coalesce(d.vlan_pool, "")
+    for k, v in var.layer3_domain : k => {
+      annotation    = (v.annotation == null ? v.annotation : "")
+      name          = coalesce(v.name, "l3out")
+      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      vlan_pool     = coalesce(v.vlan_pool, "")
     }
   }
   physical_domain = {
-    for k, d in var.vlan_pool : k => {
-      annotation    = (d.annotation == null ? v.annotation : "")
-      name          = coalesce(d.name, "access")
-      name_alias    = (d.name_alias == null ? v.name_alias : "")
-      vlan_pool     = coalesce(d.vlan_pool, "")
+    for k, v in var.physical_domain : k => {
+      annotation    = (v.annotation == null ? v.annotation : "")
+      name          = coalesce(v.name, "access")
+      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      vlan_pool     = coalesce(v.vlan_pool, "")
     }
   }
 }

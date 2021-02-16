@@ -36,15 +36,15 @@ variable "fc_interface" {
   }))
   default = {
     default = {
-      automaxspeed  = "32G" # Options are (4G|8G|16G|32G)
+      automaxspeed  = "32G"       # Options are (4G|8G|16G|32G)
       annotation    = ""
       description   = ""
-      fill_pattern  = "IDLE" # Options are (ARBFF|IDLE)
-      name          = "Auto_f_port"
+      fill_pattern  = "IDLE"      # Options are (ARBFF|IDLE)
+      name          = "auto_f_port"
       name_alias    = ""
-      port_mode     = "f" # Options are (f|np)
-      rx_bb_credit  = 64 # Range is 16-64
-      speed         = "auto" # Options are (auto|4G|8G|16G|32G)
+      port_mode     = "f"         # Options are (f|np)
+      rx_bb_credit  = 64          # Range is 16-64
+      speed         = "auto"      # Options are (auto|4G|8G|16G|32G)
       trunk_mode    = "trunk-off" # Options are (auto|trunk-off|trunk-on)
     }
   }
@@ -91,7 +91,7 @@ variable "link_level" {
   default = {
     default = {
       annotation    = ""
-      auto_neg      = "on" # Options are (on|off)
+      auto_neg      = "on" # Options are (on|off|on-enforce)... on-enforce is only supported on 5.0(1)+
       description   = ""
       fec_mode      = "inherit" # Options are (inherit|cl74-fc-fec|cl91-rs-fec|cons16-rs-fec|disable-fec|ieee-rs-fec|kp-fec)
       link_debounce = 100 # Range is 0-5000
@@ -108,6 +108,7 @@ variable "lldp" {
     admin_rx_st   = optional(string)
     admin_tx_st   = optional(string)
     annotation    = optional(string)
+    description   = optional(string)
     name          = optional(string)
     name_alias    = optional(string)
   }))
@@ -142,7 +143,7 @@ variable "mcp" {
   }
 }
 
-variable "bpdu" {
+variable "stp" {
   description = "Create Spanning-Tree (BPDU) Interface Policies."
   type = map(object({
     annotation    = optional(string)
@@ -154,9 +155,9 @@ variable "bpdu" {
   default = {
     default = {
       annotation    = ""
-      ctrl          = "\"bpdu-filter\", \"bpdu-guard\"" # This is a list.  Options are (\"bpdu-filter\"|\"bpdu-guard\")
+      ctrl          = "" # This is a list.  Options are (\"bpdu-filter\"|\"bpdu-guard\")
       description   = ""
-      name          = "bpdu_fg"
+      name          = "bpdu_ft_gd"
       name_alias    = ""
     }
   }
@@ -166,20 +167,20 @@ locals {
   cdp = {
     for k, v in var.cdp : k => {
       admin_state   = coalesce(v.admin_state, "enabled")
-      annotation    = (v.annotation == null ? v.annotation : "")
-      description   = (v.description == null ? v.description : "")
+      annotation    = (v.annotation != null ? v.annotation : "")
+      # description   = (v.description != null ? v.description : "")
       name          = coalesce(v.name, "cdp_enabled")
-      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      name_alias    = (v.name_alias != null ? v.name_alias : "")
     }
   }
   fc_interface = {
-    for k, v in var.cdp : k => {
+    for k, v in var.fc_interface : k => {
       automaxspeed  = coalesce(v.automaxspeed, "32G")
-      annotation    = (v.annotation == null ? v.annotation : "")
-      description   = (v.description == null ? v.description : "")
+      annotation    = (v.annotation != null ? v.annotation : "")
+      description   = (v.description != null ? v.description : "")
       fill_pattern  = coalesce(v.fill_pattern, "IDLE")
-      name          = coalesce(v.name, "Auto_f_port")
-      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      name          = coalesce(v.name, "auto_f_port")
+      name_alias    = (v.name_alias != null ? v.name_alias : "")
       port_mode     = coalesce(v.port_mode, "f")
       rx_bb_credit  = coalesce(v.rx_bb_credit, 64)
       speed         = coalesce(v.speed, "auto")
@@ -187,55 +188,55 @@ locals {
     }
   }
   lacp = {
-    for k, v in var.cdp : k => {
-      annotation    = (v.annotation == null ? v.annotation : "")
+    for k, v in var.lacp : k => {
+      annotation    = (v.annotation != null ? v.annotation : "")
       ctrl          = coalesce(v.ctrl, "\"graceful-conv\", \"load-defer\", \"susp-individual\"")
-      description   = (v.description == null ? v.description : "")
+      description   = (v.description != null ? v.description : "")
       max_links     = coalesce(v.max_links, 16)
       min_links     = coalesce(v.min_links, 1)
       name          = coalesce(v.name, "lacp_active")
-      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      name_alias    = (v.name_alias != null ? v.name_alias : "")
       mode          = coalesce(v.mode, "active")
     }
   }
   link_level = {
-    for k, v in var.cdp : k => {
-      annotation    = (v.annotation == null ? v.annotation : "")
+    for k, v in var.link_level : k => {
+      annotation    = (v.annotation != null ? v.annotation : "")
       auto_neg      = coalesce(v.auto_neg, "on")
-      description   = (v.description == null ? v.description : "")
-      fec_mode      = coalesce(v.fill_pattern, "inherit")
-      link_debounce = coalesce(v.fill_pattern, 100)
+      description   = (v.description != null ? v.description : "")
+      fec_mode      = coalesce(v.fec_mode, "inherit")
+      link_debounce = coalesce(v.link_debounce, 100)
       name          = coalesce(v.name, "inherit_auto")
-      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      name_alias    = (v.name_alias != null ? v.name_alias : "")
       speed         = coalesce(v.speed, "inherit")
     }
   }
   lldp = {
-    for k, v in var.cdp : k => {
-      admin_rx_st   = coalesce(v.admin_state, "enabled")
-      admin_tx_st   = coalesce(v.admin_state, "enabled")
-      annotation    = (v.annotation == null ? v.annotation : "")
-      description   = (v.description == null ? v.description : "")
+    for k, v in var.lldp : k => {
+      admin_rx_st   = coalesce(v.admin_rx_st, "enabled")
+      admin_tx_st   = coalesce(v.admin_tx_st, "enabled")
+      annotation    = (v.annotation != null ? v.annotation : "")
+      description   = (v.description != null ? v.description : "")
       name          = coalesce(v.name, "lldp_both_enabled")
-      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      name_alias    = (v.name_alias != null ? v.name_alias : "")
     }
   }
   mcp = {
-    for k, v in var.cdp : k => {
+    for k, v in var.mcp : k => {
       admin_state   = coalesce(v.admin_state, "enabled")
-      annotation    = (v.annotation == null ? v.annotation : "")
-      description   = (v.description == null ? v.description : "")
+      annotation    = (v.annotation != null ? v.annotation : "")
+      # description   = (v.description != null ? v.description : "")
       name          = coalesce(v.name, "mcp_enabled")
-      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      name_alias    = (v.name_alias != null ? v.name_alias : "")
     }
   }
-  bpdu = {
-    for k, v in var.cdp : k => {
-      annotation    = (v.annotation == null ? v.annotation : "")
-      ctrl          = coalesce(v.ctrl, "\"bpdu-filter\", \"bpdu-guard\"")
-      description   = (v.description == null ? v.description : "")
+  stp = {
+    for k, v in var.stp : k => {
+      annotation    = (v.annotation != null ? v.annotation : "")
+      ctrl          = (v.ctrl != null ? v.ctrl : "")
+      description   = (v.description != null ? v.description : "")
       name          = coalesce(v.name, "bpdu_fg")
-      name_alias    = (v.name_alias == null ? v.name_alias : "")
+      name_alias    = (v.name_alias != null ? v.name_alias : "")
     }
   }
 }

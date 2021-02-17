@@ -26,10 +26,6 @@ output "mcp" {
   value = { for v in sort(keys(aci_miscabling_protocol_interface_policy.mcp)) : v => aci_miscabling_protocol_interface_policy.mcp[v].id }
 }
 
-output "port_security" {
-  value = { for v in sort(keys(aci_port_security_policy.port_security)) : v => aci_port_security_policy.port_security[v].id }
-}
-
 output "stp" {
   value = { for v in sort(keys(aci_rest.stp)) : v => aci_rest.stp[v].id }
 }

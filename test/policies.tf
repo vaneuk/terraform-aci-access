@@ -4,15 +4,17 @@
 module "global_policies" {
   depends_on  = [module.domains]
   source      = "../modules/policies_global"
+
+  #-------------------------------------------------------------------------------------------------------------------
   aaep = {
     "access" = {
       description = "access AAEP Policy"
-      # domain      = module.domains.layer3_domain["access"]
+      domain      = module.domains.layer3["l3out"]
       # name        = "access" is already the default
     }
     "l3out" = {
       description = "l3out AAEP Policy"
-      # domain      = module.domains.physical_domain["l3out"]
+      domain      = module.domains.physical["access"]
       name        = "l3out"
     }
   }
@@ -27,6 +29,8 @@ output "global_policies" {
 #=============================
 module "intf_policies" {
   source  = "../modules/policies_interface"
+
+  #-------------------------------------------------------------------------------------------------------------------
   cdp = {
     "cdp_disabled" = {
       admin_state   = "disabled"
@@ -37,6 +41,8 @@ module "intf_policies" {
       # name          = "cdp_enabled" is already the default
     }
   }
+
+  #-------------------------------------------------------------------------------------------------------------------
   fc_interface = {
     "auto_f_port" = {
       # automaxspeed  = "32G" is already the default
@@ -65,6 +71,19 @@ module "intf_policies" {
       trunk_mode    = "trunk-on"
     }
   }
+
+  #-------------------------------------------------------------------------------------------------------------------
+    l2_interface = {
+    "default" = {
+      description   = "Default L2 Policy for QnQ/VLAN Scope" # There is no default description
+      # name          = "default" is already the default
+      # qinq          = "disabled" is already the default
+      # vepa          = "disabled" is already the default
+      # vlan_scope    = global is already the default
+    }
+  }
+
+  #-------------------------------------------------------------------------------------------------------------------
   lacp = {
     "lacp_active" = {
       # ctrl          = "\"graceful-conv\", \"load-defer\", \"susp-individual\"" is already the default
@@ -85,6 +104,8 @@ module "intf_policies" {
       mode          = "mac-pin"
     }
   }
+
+  #-------------------------------------------------------------------------------------------------------------------
   link_level = {
     "inherit_auto" = {
       # inherit_auto means it will accept the default speed for the optic in the interface and run negotiation
@@ -129,11 +150,13 @@ module "intf_policies" {
     }
     "25g_noneg" = {
       auto_neg      = "off"
-      description   = "25G no-negotiate Link Level Policy"
+      description   = "25G no-negotiate Link Level Policy.  Spectrum is Cool"
       name          = "25g_noneg"
       speed         = "25G"
     }
   }
+
+  #-------------------------------------------------------------------------------------------------------------------
   lldp = {
     "lldp_both_disabled" = {
       admin_rx_st   = "disabled"
@@ -158,6 +181,8 @@ module "intf_policies" {
       name          = "lldp_both_disabled"
     }
   }
+
+  #-------------------------------------------------------------------------------------------------------------------
   mcp = {
     "mcp_disabled" = {
       admin_state   = "disabled"
@@ -170,19 +195,21 @@ module "intf_policies" {
       # name          = "mcp_enabled" is already the default
     }
   }
+
+  #-------------------------------------------------------------------------------------------------------------------
   stp = {
     "bpdu_ft_gd" = {
-      ctrl          = "\"bpdu-filter\", \"bpdu-guard\""
+      ctrl          = "bpdu-filter, bpdu-guard"
       description   = "STP Policy with BPDU Filter and Guard Enabled"
       # name          = "bpdu_ft_gd" is already the default
     }
     "bpdu_ft" = {
-      ctrl          = "\"bpdu-filter\", \"bpdu-guard\""
+      ctrl          = "bpdu-filter"
       description   = "STP Policy with BPDU Filter Enabled"
       name          = "bpdu_ft"
     }
     "bpdu_gd" = {
-      ctrl          = "\"bpdu-filter\", \"bpdu-guard\""
+      ctrl          = "bpdu-guard"
       description   = "STP Policy with BPDU Guard Enabled"
       name          = "bpdu_ft"
     }

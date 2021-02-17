@@ -153,7 +153,6 @@ variable "mcp" {
   type = map(object({
     admin_state   = optional(string)
     annotation    = optional(string)
-    description   = optional(string)
     name          = optional(string)
     name_alias    = optional(string)
   }))
@@ -164,30 +163,6 @@ variable "mcp" {
       description   = ""
       name          = "mcp_enabled"
       name_alias    = ""
-    }
-  }
-}
-
-variable "port_security" {
-  description = "Create Mis-Cabling Protocol Policies."
-  type = map(object({
-    annotation    = optional(string)
-    description   = optional(string)
-    maximum       = optional(string)
-    name          = optional(string)
-    name_alias    = optional(string)
-    timeout       = optional(number)
-    violation     = optional(string)
-  }))
-  default = {
-    default = {
-      annotation    = ""
-      description   = ""
-      maximum       = 0 # Range is 0-12000. Default is 0 which is disabled
-      name          = "default"
-      name_alias    = ""
-      timeout       = 60 # Range is 60-3600.  60 is the defaut.
-      violation     = "protect" # Protect is the only Option.
     }
   }
 }
@@ -213,7 +188,6 @@ variable "stp" {
 }
 
 locals {
-
   cdp = {
     for k, v in var.cdp : k => {
       admin_state   = coalesce(v.admin_state, "enabled")
@@ -223,7 +197,6 @@ locals {
       name_alias    = (v.name_alias != null ? v.name_alias : "")
     }
   }
-
   fc_interface = {
     for k, v in var.fc_interface : k => {
       automaxspeed  = coalesce(v.automaxspeed, "32G")
@@ -250,7 +223,6 @@ locals {
       vlan_scope    = coalesce(v.vlan_scope, "global")
     }
   }
-
   lacp = {
     for k, v in var.lacp : k => {
       annotation    = (v.annotation != null ? v.annotation : "")
@@ -263,7 +235,6 @@ locals {
       mode          = coalesce(v.mode, "active")
     }
   }
-
   link_level = {
     for k, v in var.link_level : k => {
       annotation    = (v.annotation != null ? v.annotation : "")
@@ -276,7 +247,6 @@ locals {
       speed         = coalesce(v.speed, "inherit")
     }
   }
-
   lldp = {
     for k, v in var.lldp : k => {
       admin_rx_st   = coalesce(v.admin_rx_st, "enabled")
@@ -287,7 +257,6 @@ locals {
       name_alias    = (v.name_alias != null ? v.name_alias : "")
     }
   }
-
   mcp = {
     for k, v in var.mcp : k => {
       admin_state   = coalesce(v.admin_state, "enabled")
@@ -297,19 +266,6 @@ locals {
       name_alias    = (v.name_alias != null ? v.name_alias : "")
     }
   }
-
-  port_security = {
-    for k, v in var.port_security : k => {
-      annotation    = (v.annotation != null ? v.annotation : "")
-      description   = (v.description != null ? v.description : "")
-      maximum       = coalesce(v.maximum, 0)
-      name          = coalesce(v.name, "default")
-      name_alias    = (v.name_alias != null ? v.name_alias : "")
-      timeout       = coalesce(v.timeout, 60)
-      violation     = coalesce(v.violation, "protect")
-    }
-  }
-
   stp = {
     for k, v in var.stp : k => {
       annotation    = (v.annotation != null ? v.annotation : "")

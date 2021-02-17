@@ -43,6 +43,28 @@ resource "aci_interface_fc_policy" "fc_interface" {
 }
 
 #------------------------------------------
+# Create an L2 Interface Policy
+#------------------------------------------
+
+/*
+API Information:
+ - Class: "l2IfPol"
+ - Distinguished Name: "uni/infra/l2IfP-{Policy Name}"
+GUI Location:
+ - Fabric > Access Policies > Policies > Interface > L2 Interface : {Policy Name}
+*/
+resource "aci_l2_interface_policy" "l2_interface" {
+  for_each    = local.l2_interface
+  annotation  = each.value["annotation"]
+  description = each.value["description"]
+  name        = each.value["name"]
+  name_alias  = each.value["name_alias"]
+  qinq        = each.value["qinq"]
+  vepa        = each.value["vepa"]
+  vlan_scope  = each.value["vlan_scope"]
+}
+
+#------------------------------------------
 # Create LACP Interface Policies
 #------------------------------------------
 
@@ -56,7 +78,7 @@ GUI Location:
 resource "aci_lacp_policy" "lacp" {
   for_each    = local.lacp
   annotation  = each.value["annotation"]
-  ctrl        = [each.value["ctrl"]]
+  # ctrl        = [each.value["ctrl"]] - submitted a bug.  This needs to be fixed.
   description = each.value["description"]
   max_links   = each.value["max_links"]
   min_links   = each.value["min_links"]
@@ -130,6 +152,27 @@ resource "aci_miscabling_protocol_interface_policy" "mcp" {
 }
 
 #------------------------------------------
+# Create Port Security Interface Policies
+#------------------------------------------
+
+/*
+API Information:
+ - Class: "l2PortSecurityPol"
+ - Distinguished Name: "'uni/infra/portsecurityP-{Policy Name}'"
+GUI Location:
+ - Fabric > Access Policies > Policies > Interface > Port Security : {Policy Name}
+*/
+resource "aci_port_security_policy" "port_security" {
+  annotation  = each.value["annotation"]
+  description = each.value["description"]
+  maximum     = each.value["maximum"]
+  name        = each.value["name"]
+  name_alias  = each.value["name_alias"]
+  timeout     = each.value["timeout"]
+  violation   = each.value["violation"]
+}
+
+#------------------------------------------
 # Create Spanning-Tree Interface Policies
 #------------------------------------------
 
@@ -153,8 +196,8 @@ resource "aci_rest" "stp" {
       "ctrl": "${each.value["ctrl"]}",
       "descr": "${each.value["description"]}",
       "name": "${each.value["name"]}",
-      "nameAlias": "${each.value["name_alias"]}",
-    },
+      "nameAlias": "${each.value["name_alias"]}"
+    }
   }
 }
   EOF

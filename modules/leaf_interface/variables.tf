@@ -14,10 +14,10 @@ variable "vlan_pool" {
   default = {
     default = {
       alloc_mode  = "static"
-      annotation 	= ""
+      annotation  = ""
       description = ""
       name        = "msite"
-      name_alias 	= ""
+      name_alias  = ""
     }
   }
 }
@@ -29,7 +29,7 @@ locals {
       annotation  = (v.annotation == null ? v.annotation : "")
       description = (v.description == null ? v.description : "")
       name        = coalesce(v.name, "msite")
-      name_alias 	= (v.name_alias == null ? v.name_alias : "")
+      name_alias  = (v.name_alias == null ? v.name_alias : "")
     }
   }
 }

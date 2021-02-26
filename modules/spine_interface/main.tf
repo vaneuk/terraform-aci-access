@@ -10,10 +10,10 @@ GUI Location:
  - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > [Spine Interface Profile]:[Spine Interface Selector]
 */
 resource "aci_rest" "spine_intf_selector" {
-	depends_on       = [each.value["spine_profile"]]
-	path             = "/api/node/mo/uni/infra/spaccportprof-${each.value["spine_profile"]}/shports-${each.value["name"]}-typ-range.json"
-	class_name       = "infraSHPortS"
-	payload          = <<EOF
+  depends_on = [each.value["spine_profile"]]
+  path       = "/api/node/mo/uni/infra/spaccportprof-${each.value["spine_profile"]}/shports-${each.value["name"]}-typ-range.json"
+  class_name = "infraSHPortS"
+  payload    = <<EOF
 {
     "infraSHPortS": {
         "attributes": {

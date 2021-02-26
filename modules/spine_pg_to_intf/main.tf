@@ -1,5 +1,5 @@
 #------------------------------------------
-# Create VLAN Pools 
+# Create VLAN Pools
 #------------------------------------------
 
 /*
@@ -9,10 +9,10 @@ API Information:
 GUI Location:
  - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > [Spine Interface Profile] > [Spine Interface Selector]:[Interface Policy Group]
 */
-resource "aci_rest" "pg_" {
-	path		= "/api/node/mo/uni/infra/accportprof-{{Switch_Name}}/hports-{{Interface_Selector}}-typ-range/rsaccBaseGrp.json"
-	class_name	= "infraRsAccBaseGrp"
-	payload		= <<EOF
+resource "aci_rest" "interface_policy_group" {
+  path       = "/api/node/mo/uni/infra/accportprof-{{Switch_Name}}/hports-{{Interface_Selector}}-typ-range/rsaccBaseGrp.json"
+  class_name = "infraRsAccBaseGrp"
+  payload    = <<EOF
 {
     "infraRsAccBaseGrp": {
         "attributes": {

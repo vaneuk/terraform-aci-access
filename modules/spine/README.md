@@ -1,32 +1,39 @@
-# snmp_client_grp - SNMP Client Group Terraform Module - aci_rest
+# interface_policy_groups - ACI Interface Policy Groups Terraform Module
 
 ## Usage
 
 ```hcl
-module "snmp_client_grp" {
+module "interface_policy_groups" {
 
-  source = "terraform-aci-fabric//modules/snmp_client_grp"
+  source = "terraform-aci-access//modules/interface_policy_groups"
 
   # omitted...
 }
 ```
 
-This module will Create a SNMP Client Group in the default SNMP Policy.
+This module will Add NTP Servers to the default Date and Time Policy.
 
-These resources are created:
+## APIC Reference Information
 
-* [SNMP Client Group](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest)
+Use the Class or Distinguished Name to verify in the API.
 
-API Information:
+**Access Policy Group:**
 
-* Class: "snmpClientGrpP"
-* Distinguished Name: "uni/fabric/snmppol-default/clgrp-{Client Group Name}"
+* Class: "infraAccPortGrp"
+* Distinguished Name: "uni/infra/funcprof/accportgrp-{Name}"
+* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > Leaf Access Port > {Name}
 
-GUI Location:
+**Breakout Policy Group:**
 
-SNMP Client Group:
+* Class: "infraBrkoutPortGrp"
+* Distinguished Name: "uni/infra/funcprof/brkoutportgrp-{Name}"
+* GUI Location: Fabric > Access Policies > Interface > Leaf Interfaces > Policy Groups > Leaf Breakout Port Group:{Name}
 
-* Fabric > Fabric Policies > Policies > Pod > SNMP > default - Client Group Policies
+**Bundle [port-channel|vpc] Policy Group:**
+
+* Class: "infraAccBndlGrp"
+* Distinguished Name: "uni/infra/funcprof/accbundle-{Name}"
+* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > [PC or VPC] Interface > {Name}
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -50,7 +57,12 @@ No Modules.
 
 | Name |
 |------|
+| [aci_fabric_node_member](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/fabric_node_member) |
 | [aci_rest](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/rest) |
+| [aci_spine_interface_profile](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/spine_interface_profile) |
+| [aci_spine_port_selector](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/spine_port_selector) |
+| [aci_spine_profile](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/spine_profile) |
+| [aci_spine_switch_association](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/spine_switch_association) |
 
 ## Inputs
 

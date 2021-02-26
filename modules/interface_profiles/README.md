@@ -5,7 +5,7 @@
 ```hcl
 module "pod_policy" {
 
-  source = "terraform-aci-fabric//modules/pod_policy"
+  source = "terraform-aci-access//modules/pod_policy"
 
   # omitted...
 }
@@ -58,7 +58,7 @@ No Modules.
 | bgp\_policy | BGP Route Reflector Policy Name | `string` | `"default"` | no |
 | coop\_policy | COOP Group Policy Name | `string` | `"default"` | no |
 | date\_time | Date and Time Policy Name | `string` | `"default"` | no |
-| isis\_poicy | ISIS Policy Name | `string` | `"default"` | no |
+| isis\_policy | ISIS Policy Name | `string` | `"default"` | no |
 | macsec\_policy | MACsec Policy Name | `string` | `"default"` | no |
 | mgmt\_policy | Management Access Policy Name | `string` | `"default"` | no |
 | pod\_pgrp | Pod Policy Group Name.  This will be used to assign the following policies to the switches. | `string` | `"default"` | no |

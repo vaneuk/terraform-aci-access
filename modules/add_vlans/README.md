@@ -1,30 +1,25 @@
-# snmp_clients - SNMP Clients Terraform Module - aci_rest
+# add_vlans - Add VLANs Terraform Module
 
 ## Usage
 
 ```hcl
-module "snmp_clients" {
+module "add_vlans" {
 
-  source = "terraform-aci-fabric//modules/snmp_clients"
+  source = "terraform-aci-access//modules/add_vlans"
 
   # omitted...
 }
 ```
 
-This module will Add SNMP Clients to a SNMP Client Group in the default SNMP Policy.
+This module will Add VLANs to a VLAN Pool.
 
-These resources are created:
+## APIC Reference Information
 
-* [SNMP Clients](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest)
+Use the Class or Distinguished Name to verify in the API.
 
-API Information:
-
-* Class: "snmpClientP"
-* Distinguished Name: "uni/fabric/snmppol-default/clgrp-{Client Group Name}/client-[SNMP_Client]"
-
-GUI Location:
-
-* Fabric > Fabric Policies > Policies > Pod > SNMP > default > Client Group Policies: {Client Group Name} > Client Entries
+* Class: "fvnsEncapBlk"
+* Distinguished Name: "uni/infra/vlanns-[{Name}]-{Allocation_Mode}/from-[vlan-{VLAN_ID}]-to-[vlan-{VLAN_ID}]"
+* GUI Location: Fabric > Access Policies > Pools > VLAN:[{Name}] > Encap Blocks
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -48,15 +43,13 @@ No Modules.
 
 | Name |
 |------|
-| [aci_rest](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/rest) |
+| [aci_ranges](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/ranges) |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| client | IPv4 or IPv6 Address of the SNMP Client | `string` | `"198.18.1.1"` | no |
-| client\_group | SNMP Client Group Name | `string` | `"default_oob"` | no |
-| name | Descriptive Name for the SNMP Client | `string` | `"server1"` | no |
+| vlan\_list | Add VLANs to VLAN Pools | <pre>map(list(object({<br>    alloc_mode = optional(string)<br>    annotation = optional(string)<br>    from       = optional(number)<br>    name_alias = optional(string)<br>    role       = optional(string)<br>    to         = optional(number)<br>    vlan_pool  = optional(string)<br>  })))</pre> | n/a | yes |
 
 ## Outputs
 

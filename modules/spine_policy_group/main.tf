@@ -9,23 +9,23 @@ API Information:
 GUI Location:
  - Fabric > Access Policies > Switches > Spine Switches > Policy Groups: default
 */
-resource "aci_rest" "Spine_Policy_Group" {
-	path		= "/api/node/mo/uni/infra/funcprof/spaccnodepgrp-default.json"
-	class_name	= "infraSpineAccNodePGrp"
-	payload		= <<EOF
+resource "aci_rest" "spine_policy_group" {
+  for_each   = local.spine_policy_Group
+  path       = "/api/node/mo/uni/infra/funcprof/spaccnodepgrp-${each.value.name}.json"
+  class_name = "infraSpineAccNodePGrp"
+  payload    = <<EOF
 {
 	"infraSpineAccNodePGrp": {
 		"attributes": {
-			"dn": "uni/infra/funcprof/spaccnodepgrp-default",
-			"name": "default",
-			"descr": "Default Policy Group for Spine Switches - Created by Terraform Startup Script.",
-			"rn": "spaccnodepgrp-default"
+			"dn": "uni/infra/funcprof/spaccnodepgrp-${each.value.name}",
+			"name": "${each.value.name}",
+			"descr": "${each.value.description}"
 		},
 		"children": [
 			{
 				"infraRsSpineCoppProfile": {
 					"attributes": {
-						"tnCoppSpineProfileName": "default"
+						"tnCoppSpineProfileName": "${each.value.copp_spine_plcy}"
 					},
 					"children": []
 				}
@@ -33,7 +33,7 @@ resource "aci_rest" "Spine_Policy_Group" {
 			{
 				"infraRsSpineBfdIpv4InstPol": {
 					"attributes": {
-						"tnBfdIpv4InstPolName": "default"
+						"tnBfdIpv4InstPolName": "${each.value.bfd_ipv4_plcy}"
 					},
 					"children": []
 				}
@@ -41,7 +41,7 @@ resource "aci_rest" "Spine_Policy_Group" {
 			{
 				"infraRsSpineBfdIpv6InstPol": {
 					"attributes": {
-						"tnBfdIpv6InstPolName": "default"
+						"tnBfdIpv6InstPolName": "${each.value.bfd_ipv6_plcy}"
 					},
 					"children": []
 				}
@@ -49,7 +49,7 @@ resource "aci_rest" "Spine_Policy_Group" {
 			{
 				"infraRsIaclSpineProfile": {
 					"attributes": {
-						"tnIaclSpineProfileName": "default"
+						"tnIaclSpineProfileName": "${each.value.copp_pre_filter}"
 					},
 					"children": []
 				}
@@ -57,7 +57,7 @@ resource "aci_rest" "Spine_Policy_Group" {
 			{
 				"infraRsSpinePGrpToCdpIfPol": {
 					"attributes": {
-						"tnCdpIfPolName": "cdp_Enabled"
+						"tnCdpIfPolName": "${each.value.cdp_policy}"
 					},
 					"children": []
 				}
@@ -65,7 +65,7 @@ resource "aci_rest" "Spine_Policy_Group" {
 			{
 				"infraRsSpinePGrpToLldpIfPol": {
 					"attributes": {
-						"tnLldpIfPolName": "lldp_Enabled"
+						"tnLldpIfPolName": "${each.value.lldp_policy}"
 					},
 					"children": []
 				}

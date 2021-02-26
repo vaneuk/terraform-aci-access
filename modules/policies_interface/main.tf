@@ -10,11 +10,11 @@ GUI Location:
  - Fabric > Access Policies > Policies > Interface > CDP Interface : {Policy Name}
 */
 resource "aci_cdp_interface_policy" "cdp" {
-  for_each    = local.cdp
-  admin_st    = each.value["admin_state"]
-  annotation  = each.value["annotation"]
-  name        = each.value["name"]
-  name_alias  = each.value["name_alias"]
+  for_each   = local.cdp
+  admin_st   = each.value["admin_state"]
+  annotation = each.value["annotation"]
+  name       = each.value["name"]
+  name_alias = each.value["name_alias"]
 }
 
 #------------------------------------------
@@ -29,17 +29,17 @@ GUI Location:
  - Fabric > Access Policies > Policies > Interface > Fibre Channel Interface : {Policy Name}
 */
 resource "aci_interface_fc_policy" "fc_interface" {
-  for_each      = local.fc_interface
-  automaxspeed  = each.value["automaxspeed"]
-  annotation    = each.value["annotation"]
-  description   = each.value["description"]
-  fill_pattern  = each.value["fill_pattern"]
-  name          = each.value["name"]
-  name_alias    = each.value["name_alias"]
-  port_mode     = each.value["port_mode"]
-  rx_bb_credit  = each.value["rx_bb_credit"]
-  speed         = each.value["speed"]
-  trunk_mode    = each.value["trunk_mode"]
+  for_each     = local.fc_interface
+  automaxspeed = each.value["automaxspeed"]
+  annotation   = each.value["annotation"]
+  description  = each.value["description"]
+  fill_pattern = each.value["fill_pattern"]
+  name         = each.value["name"]
+  name_alias   = each.value["name_alias"]
+  port_mode    = each.value["port_mode"]
+  rx_bb_credit = each.value["rx_bb_credit"]
+  speed        = each.value["speed"]
+  trunk_mode   = each.value["trunk_mode"]
 }
 
 #------------------------------------------
@@ -76,8 +76,8 @@ GUI Location:
  - Fabric > Access Policies > Policies > Interface > Port Channel : {Policy Name}
 */
 resource "aci_lacp_policy" "lacp" {
-  for_each    = local.lacp
-  annotation  = each.value["annotation"]
+  for_each   = local.lacp
+  annotation = each.value["annotation"]
   # ctrl        = [each.value["ctrl"]] - submitted a bug.  This needs to be fixed.
   description = each.value["description"]
   max_links   = each.value["max_links"]
@@ -143,12 +143,12 @@ GUI Location:
  - Fabric > Access Policies > Policies > Interface > MCP Interface : {Policy Name}
 */
 resource "aci_miscabling_protocol_interface_policy" "mcp" {
-  for_each    = local.mcp
-  admin_st    = each.value["admin_state"]
-  annotation  = each.value["annotation"]
+  for_each   = local.mcp
+  admin_st   = each.value["admin_state"]
+  annotation = each.value["annotation"]
   # description = each.value["description"]
-  name        = each.value["name"]
-  name_alias  = each.value["name_alias"]
+  name       = each.value["name"]
+  name_alias = each.value["name_alias"]
 }
 
 #------------------------------------------
@@ -158,11 +158,12 @@ resource "aci_miscabling_protocol_interface_policy" "mcp" {
 /*
 API Information:
  - Class: "l2PortSecurityPol"
- - Distinguished Name: "'uni/infra/portsecurityP-{Policy Name}'"
+ - Distinguished Name: "uni/infra/portsecurityP-{Policy Name}"
 GUI Location:
  - Fabric > Access Policies > Policies > Interface > Port Security : {Policy Name}
 */
 resource "aci_port_security_policy" "port_security" {
+  for_each    = local.port_security
   annotation  = each.value["annotation"]
   description = each.value["description"]
   maximum     = each.value["maximum"]

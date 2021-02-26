@@ -6,12 +6,12 @@ GUI Location:
  - Fabric > Access Policies > Inventory > Fabric Membership:[Registered Nodes or Nodes Pending Registration]
 */
 resource "aci_fabric_node_member" "inventory" {
-	name      = each.value["name"]
-	node_id   = each.value["node_id"]
-	node_type = each.value["node_type"]
-	pod_id    = each.value["pod_id"]
-	role      = each.value["role"]
-	serial    = each.value["serial"]
+  name      = each.value["name"]
+  node_id   = each.value["node_id"]
+  node_type = each.value["node_type"]
+  pod_id    = each.value["pod_id"]
+  role      = each.value["role"]
+  serial    = each.value["serial"]
 }
 
 /*
@@ -22,9 +22,9 @@ GUI Location:
  - Admin > Firmware > Nodes:{Maint_Grp}
 */
 resource "aci_rest" "maint_group" {
-	path		= "/api/node/mo/uni/fabric/maintgrp-switch_{Maint_Grp}.json"
-	class_name	= "maintMaintGrp"
-	payload		= <<EOF
+  path       = "/api/node/mo/uni/fabric/maintgrp-switch_{Maint_Grp}.json"
+  class_name = "maintMaintGrp"
+  payload    = <<EOF
 {
     "maintMaintGrp": {
         "attributes": {
@@ -56,7 +56,7 @@ GUI Location:
  - Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > {Name}
 */
 resource "aci_spine_interface_profile" "default" {
-	name   = each.value["spine_intf_profile"]
+  name = each.value["spine_intf_profile"]
 }
 
 /*
@@ -67,7 +67,7 @@ GUI Location:
  - Fabric > Access Policies > Switches > Spine Switches > Profiles > {Name}
 */
 resource "aci_spine_profile" "default" {
-	name   = each.value["spine_profile"]
+  name = each.value["spine_profile"]
 }
 
 /*
@@ -78,9 +78,9 @@ GUI Location:
  - Fabric > Access Policies > Switches > Spine Switches > Profiles > {Name}: Spine Selectors [{Name}]
 */
 resource "aci_spine_switch_association" "default" {
-	spine_profile_dn               = aci_spine_profile.default.id
-	name                           = "{Name}"
-	spine_switch_association_type  = "range"
+  spine_profile_dn              = aci_spine_profile.default.id
+  name                          = "{Name}"
+  spine_switch_association_type = "range"
 }
 
 /*
@@ -91,8 +91,8 @@ GUI Location:
  - Fabric > Access Policies > Switches > Spine Switches > Profiles > {Name}: Spine Interface Selector Profiles: {Name}
 */
 resource "aci_spine_port_selector" "default" {
-	spine_profile_dn   = aci_spine_profile.default.id
-	tdn                = aci_spine_interface_profile.default.id
+  spine_profile_dn = aci_spine_profile.default.id
+  tdn              = aci_spine_interface_profile.default.id
 }
 
 /*
@@ -102,11 +102,11 @@ API Information:
 GUI Location:
  - Fabric > Access Policies > Switches > Spine Switches > Profiles > {Name}: Spine Selectors Policy Group: default
 */
-resource "aci_rest" "spine_policy_group_{Name}" {
-	depends_on  = [aci_spine_profile.default]
-	path		= "/api/node/mo/uni/infra/spprof-{Name}/spines-{Name}-typ-range.json"
-	class_name	= "infraSpineS"
-	payload		= <<EOF
+resource "aci_rest" "spine_policy_group" {
+  depends_on = [aci_spine_profile.default]
+  path       = "/api/node/mo/uni/infra/spprof-{Name}/spines-{Name}-typ-range.json"
+  class_name = "infraSpineS"
+  payload    = <<EOF
 {
     "infraSpineS": {
         "attributes": {

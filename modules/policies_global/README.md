@@ -1,52 +1,39 @@
-# dns - Add DNS Domains and Servers for APIC/switch domain resolution Terraform Module - aci_rest
+# interface_policy_groups - ACI Interface Policy Groups Terraform Module
 
 ## Usage
 
 ```hcl
-module "dns" {
+module "interface_policy_groups" {
 
-  source = "terraform-aci-fabric//modules/dns"
+  source = "terraform-aci-access//modules/interface_policy_groups"
 
   # omitted...
 }
 ```
 
-This module will Add Search domains and the FQDN, then add DNS Servers for Fabric FQDN resolution.
+This module will Add NTP Servers to the default Date and Time Policy.
 
-These resources are created:
+## APIC Reference Information
 
-* [dns](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest)
+Use the Class or Distinguished Name to verify in the API.
 
-API Information:
+**Access Policy Group:**
 
-FQDN and Search Domains:
+* Class: "infraAccPortGrp"
+* Distinguished Name: "uni/infra/funcprof/accportgrp-{Name}"
+* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > Leaf Access Port > {Name}
 
-* Class: "dnsDomain"
-* Distinguished Name: "uni/fabric/dnsp-default/dom-[{Domain}]"
+**Breakout Policy Group:**
 
-DNS Management Domain:
+* Class: "infraBrkoutPortGrp"
+* Distinguished Name: "uni/infra/funcprof/brkoutportgrp-{Name}"
+* GUI Location: Fabric > Access Policies > Interface > Leaf Interfaces > Policy Groups > Leaf Breakout Port Group:{Name}
 
-* Class: "dnsRsProfileToEpg"
-* Distinguished Name: "uni/tn-mgmt/mgmtp-default/{Mgmt_Domain}-{EPG}"
+**Bundle [port-channel|vpc] Policy Group:**
 
-DNS Server:
-
-* Class: "dnsProv"
-* Distinguished Name: "uni/fabric/dnsp-default/prov-[{DNS_Server}]"
-
-GUI Location:
-
-FQDN and Search Domains:
-
-* Fabric > Fabric Policies > Policies > Global > DNS Profiles > default: DNS Domains
-
-DNS Management Domain:
-
-* Fabric > Fabric Policies > Policies > Global > DNS Profiles > default: Management EPG
-
-DNS Server:
-
-* Fabric > Fabric Policies > Policies > Global > DNS Profiles > default: DNS Providers
+* Class: "infraAccBndlGrp"
+* Distinguished Name: "uni/infra/funcprof/accbundle-{Name}"
+* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > [PC or VPC] Interface > {Name}
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -70,20 +57,17 @@ No Modules.
 
 | Name |
 |------|
-| [aci_rest](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/rest) |
+| [aci_attachable_access_entity_profile](https://registry.terraform.io/providers/ciscodevnet/aci/0.5.2/docs/resources/attachable_access_entity_profile) |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| dns\_domain | Top Level dns\_domain variable to work around default variable merger... The real Variable holder is 'dns\_domain\_default'. | `string` | `""` | no |
-| dns\_domain\_default | Assigned FQDN and Search Domains.  Assign yes to the fqdn variable only to the FQDN.  Assign no to the rest. | <pre>object({<br>    domain = string<br>    fqdn   = string<br>  })</pre> | <pre>{<br>  "domain": "example.com",<br>  "fqdn": "no"<br>}</pre> | no |
-| dns\_epg | What EPG in the Management Domain should be used to reach the DNS Server(s). | `string` | `"default"` | no |
-| dns\_mgmt | Options are 'inb' or 'oob'.  Define the Management Domain to reach the DNS Server(s). | `string` | `"oob"` | no |
-| dns\_server | Top Level dns\_domain variable to work around default variable merger... The real Variable holder is 'dns\_server\_default'. | `string` | `""` | no |
-| dns\_server\_default | Add DNS Servers for domain resolution.  You can configure a maximum of two servers.  Only one can be preferred 'true'. | <pre>object({<br>    preferred = bool<br>    server    = string<br>  })</pre> | <pre>{<br>  "preferred": false,<br>  "server": "198.18.1.1"<br>}</pre> | no |
+| aaep | Create a Attachable Access Entity Profile: Fabric > Access Policies > Policies > Global > Attachable Access Entity Profiles : {Policy Name} | <pre>map(object({<br>    annotation  = optional(string)<br>    description = optional(string)<br>    domain      = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "domain": "",<br>    "name": "access",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| aaep | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

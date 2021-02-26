@@ -1,30 +1,39 @@
-# snmp_clients - SNMP Clients Terraform Module - aci_rest
+# interface_policy_groups - ACI Interface Policy Groups Terraform Module
 
 ## Usage
 
 ```hcl
-module "snmp_clients" {
+module "interface_policy_groups" {
 
-  source = "terraform-aci-fabric//modules/snmp_clients"
+  source = "terraform-aci-access//modules/interface_policy_groups"
 
   # omitted...
 }
 ```
 
-This module will Add SNMP Clients to a SNMP Client Group in the default SNMP Policy.
+This module will Add NTP Servers to the default Date and Time Policy.
 
-These resources are created:
+## APIC Reference Information
 
-* [SNMP Clients](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest)
+Use the Class or Distinguished Name to verify in the API.
 
-API Information:
+**Access Policy Group:**
 
-* Class: "snmpClientP"
-* Distinguished Name: "uni/fabric/snmppol-default/clgrp-{Client Group Name}/client-[SNMP_Client]"
+* Class: "infraAccPortGrp"
+* Distinguished Name: "uni/infra/funcprof/accportgrp-{Name}"
+* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > Leaf Access Port > {Name}
 
-GUI Location:
+**Breakout Policy Group:**
 
-* Fabric > Fabric Policies > Policies > Pod > SNMP > default > Client Group Policies: {Client Group Name} > Client Entries
+* Class: "infraBrkoutPortGrp"
+* Distinguished Name: "uni/infra/funcprof/brkoutportgrp-{Name}"
+* GUI Location: Fabric > Access Policies > Interface > Leaf Interfaces > Policy Groups > Leaf Breakout Port Group:{Name}
+
+**Bundle [port-channel|vpc] Policy Group:**
+
+* Class: "infraAccBndlGrp"
+* Distinguished Name: "uni/infra/funcprof/accbundle-{Name}"
+* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > [PC or VPC] Interface > {Name}
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -54,11 +63,11 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| client | IPv4 or IPv6 Address of the SNMP Client | `string` | `"198.18.1.1"` | no |
-| client\_group | SNMP Client Group Name | `string` | `"default_oob"` | no |
-| name | Descriptive Name for the SNMP Client | `string` | `"server1"` | no |
+| vlan\_pool | Create a VLAN Pool | <pre>map(object({<br>    alloc_mode  = optional(string)<br>    annotation  = optional(string)<br>    description = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "alloc_mode": "static",<br>    "annotation": "",<br>    "description": "",<br>    "name": "msite",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| vlan\_pool\_id | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

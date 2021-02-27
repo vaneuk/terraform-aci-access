@@ -1,3 +1,4 @@
-output "vlan_pool_id" {
-  value = { for p in sort(keys(aci_vlan_pool.vlan_pool)) : p => aci_vlan_pool.vlan_pool[p].id }
+output "leaf_interface_sub" {
+  description = "This output will provide the Leaf Sub Interface Profile ID"
+  value       = { for p in sort(keys(leaf_interface_sub.leaf_interface_sub)) : p => leaf_interface_sub.leaf_interface_sub[p].id }
 }

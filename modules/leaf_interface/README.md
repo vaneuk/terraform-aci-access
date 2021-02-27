@@ -70,5 +70,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| vlan\_pool\_id | n/a |
+| vlan\_pool\_id | This output will provide the Layer 3 Domain ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

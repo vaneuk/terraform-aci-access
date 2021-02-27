@@ -49,11 +49,11 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| membership | Add Leaf/Spine to Fabric Inventory | <pre>map(object({<br>    annotation  = optional(string)<br>    ext_pool_id = optional(string)<br>    fabric_id   = optional(number)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>    node_id     = optional(number)<br>    node_type   = optional(string)<br>    pod_id      = optional(number)<br>    role        = optional(string)<br>    serial      = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "ext_pool_id": "",<br>    "fabric_id": 1,<br>    "name": "leaf201",<br>    "name_alias": "",<br>    "node_id": 201,<br>    "node_type": "unspecified",<br>    "pod_id": 1,<br>    "role": "leaf",<br>    "serial": "TEP-1-101"<br>  }<br>}</pre> | no |
+| membership | Add a Leaf/Spine to Fabric Inventory | <pre>map(object({<br>    annotation  = optional(string)<br>    ext_pool_id = optional(string)<br>    fabric_id   = optional(number)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>    node_id     = optional(number)<br>    node_type   = optional(string)<br>    pod_id      = optional(number)<br>    role        = optional(string)<br>    serial      = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "ext_pool_id": "",<br>    "fabric_id": 1,<br>    "name": "leaf201",<br>    "name_alias": "",<br>    "node_id": 201,<br>    "node_type": "unspecified",<br>    "pod_id": 1,<br>    "role": "leaf",<br>    "serial": "TEP-1-101"<br>  }<br>}</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| leaf\_profile | n/a |
+| membership | This output will provide the Inventory Membership ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

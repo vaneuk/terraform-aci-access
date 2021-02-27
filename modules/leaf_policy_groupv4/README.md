@@ -55,5 +55,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| leaf\_policy\_grp | n/a |
+| leaf\_policy\_group | This output will provide the Leaf Policy Group ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

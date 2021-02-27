@@ -3,7 +3,7 @@ terraform {
 }
 
 variable "membership" {
-  description = "Add Leaf/Spine to Fabric Inventory"
+  description = "Add a Leaf/Spine to Fabric Inventory"
   type = map(object({
     annotation  = optional(string)
     ext_pool_id = optional(string)

@@ -52,7 +52,5 @@ No Modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| vlan\_pool\_id | n/a |
+No output.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

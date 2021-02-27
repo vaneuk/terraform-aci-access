@@ -1,4 +1,4 @@
-# policies_interface - BGP Configuration Terraform Module - aci_rest
+# policies_interface - ACI Fabric > Access > Policies > Interface Terraform Module
 
 ## Usage
 
@@ -109,25 +109,25 @@ No Modules.
 |------|-------------|------|---------|:--------:|
 | cdp | Create CDP Interface Policies. | <pre>map(object({<br>    admin_state = optional(string)<br>    annotation  = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "admin_state": "enabled",<br>    "annotation": "",<br>    "name": "cdp_enabled",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
 | fc\_interface | Create Fibre-Channel Interface Policies. | <pre>map(object({<br>    automaxspeed = optional(string)<br>    annotation   = optional(string)<br>    description  = optional(string)<br>    fill_pattern = optional(string)<br>    name         = optional(string)<br>    name_alias   = optional(string)<br>    port_mode    = optional(string)<br>    rx_bb_credit = optional(number)<br>    speed        = optional(string)<br>    trunk_mode   = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "automaxspeed": "32G",<br>    "description": "",<br>    "fill_pattern": "IDLE",<br>    "name": "auto_f_port",<br>    "name_alias": "",<br>    "port_mode": "f",<br>    "rx_bb_credit": 64,<br>    "speed": "auto",<br>    "trunk_mode": "trunk-off"<br>  }<br>}</pre> | no |
-| l2\_interface | Create LACP Interface Policies. | <pre>map(object({<br>    annotation  = optional(string)<br>    description = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>    qinq        = optional(string)<br>    vepa        = optional(string)<br>    vlan_scope  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "name": "default",<br>    "name_alias": "",<br>    "qinq": "disabled",<br>    "vepa": "disabled",<br>    "vlan_scope": "global"<br>  }<br>}</pre> | no |
+| l2\_interface | Create L2 Interface Policies.  Components are QnQ, Reflective Relay, and VLAN Scope | <pre>map(object({<br>    annotation  = optional(string)<br>    description = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>    qinq        = optional(string)<br>    vepa        = optional(string)<br>    vlan_scope  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "name": "default",<br>    "name_alias": "",<br>    "qinq": "disabled",<br>    "vepa": "disabled",<br>    "vlan_scope": "global"<br>  }<br>}</pre> | no |
 | lacp | Create LACP Interface Policies. | <pre>map(object({<br>    annotation  = optional(string)<br>    ctrl        = optional(string)<br>    description = optional(string)<br>    max_links   = optional(number)<br>    min_links   = optional(number)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>    mode        = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "ctrl": "\"graceful-conv\", \"load-defer\", \"susp-individual\"",<br>    "description": "",<br>    "max_links": 16,<br>    "min_links": 1,<br>    "mode": "active",<br>    "name": "lacp_active",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
-| link\_level | Create Fibre-Channel Interface Policies. | <pre>map(object({<br>    annotation    = optional(string)<br>    auto_neg      = optional(string)<br>    description   = optional(string)<br>    fec_mode      = optional(string)<br>    link_debounce = optional(number)<br>    name          = optional(string)<br>    name_alias    = optional(string)<br>    speed         = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "auto_neg": "on",<br>    "description": "",<br>    "fec_mode": "inherit",<br>    "link_debounce": 100,<br>    "name": "inherit_auto",<br>    "name_alias": "",<br>    "speed": "inherit"<br>  }<br>}</pre> | no |
+| link\_level | Create Link Level Interface Policies. | <pre>map(object({<br>    annotation    = optional(string)<br>    auto_neg      = optional(string)<br>    description   = optional(string)<br>    fec_mode      = optional(string)<br>    link_debounce = optional(number)<br>    name          = optional(string)<br>    name_alias    = optional(string)<br>    speed         = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "auto_neg": "on",<br>    "description": "",<br>    "fec_mode": "inherit",<br>    "link_debounce": 100,<br>    "name": "inherit_auto",<br>    "name_alias": "",<br>    "speed": "inherit"<br>  }<br>}</pre> | no |
 | lldp | Create LLDP Interface Policies. | <pre>map(object({<br>    admin_rx_st = optional(string)<br>    admin_tx_st = optional(string)<br>    annotation  = optional(string)<br>    description = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "admin_rx_st": "enabled",<br>    "admin_tx_st": "enabled",<br>    "annotation": "",<br>    "description": "",<br>    "name": "lldp_both_enabled",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
 | mcp | Create Mis-Cabling Protocol Policies. | <pre>map(object({<br>    admin_state = optional(string)<br>    annotation  = optional(string)<br>    description = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "admin_state": "enabled",<br>    "annotation": "",<br>    "description": "",<br>    "name": "mcp_enabled",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
-| port\_security | Create Mis-Cabling Protocol Policies. | <pre>map(object({<br>    annotation  = optional(string)<br>    description = optional(string)<br>    maximum     = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>    timeout     = optional(number)<br>    violation   = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "maximum": 0,<br>    "name": "default",<br>    "name_alias": "",<br>    "timeout": 60,<br>    "violation": "protect"<br>  }<br>}</pre> | no |
+| port\_security | Create Port Security Policies. | <pre>map(object({<br>    annotation  = optional(string)<br>    description = optional(string)<br>    maximum     = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>    timeout     = optional(number)<br>    violation   = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "maximum": 0,<br>    "name": "default",<br>    "name_alias": "",<br>    "timeout": 60,<br>    "violation": "protect"<br>  }<br>}</pre> | no |
 | stp | Create Spanning-Tree (BPDU) Interface Policies. | <pre>map(object({<br>    annotation  = optional(string)<br>    ctrl        = optional(string)<br>    description = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "ctrl": "",<br>    "description": "",<br>    "name": "bpdu_ft_gd",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| cdp | n/a |
-| fc\_interface | n/a |
-| l2\_interface | n/a |
-| lacp | n/a |
-| link\_level | n/a |
-| lldp | n/a |
-| mcp | n/a |
-| port\_security | n/a |
-| stp | n/a |
+| cdp | CDP Policy ID |
+| fc\_interface | Fibre Channel Interface Policy ID |
+| l2\_interface | L2 Interface Policy ID |
+| lacp | LACP Policy ID |
+| link\_level | Link Level Policy ID |
+| lldp | LLDP Policy ID |
+| mcp | Miscabling Protocol Policy ID |
+| port\_security | Port Security Policy ID |
+| stp | Spanning Tree Policy ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

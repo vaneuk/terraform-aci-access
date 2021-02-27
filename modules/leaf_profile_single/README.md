@@ -49,11 +49,11 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| leaf\_profile | Create Leaf Profile. | <pre>map(object({<br>    annotation                   = optional(string)<br>    description                  = optional(string)<br>    name                         = optional(string)<br>    name_alias                   = optional(string)<br>    node_block_from              = optional(number)<br>    node_block_name              = optional(string)<br>    node_block_to                = optional(number)<br>    leaf_selector_name           = optional(string)<br>    relation_infra_rs_acc_port_p = optional(string)<br>    switch_association_type      = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "leaf_selector_name": "leaf201",<br>    "name": "default",<br>    "name_alias": "",<br>    "node_block_from": 201,<br>    "node_block_name": "blk1",<br>    "node_block_to": 201,<br>    "relation_infra_rs_acc_port_p": "",<br>    "switch_association_type": "range"<br>  }<br>}</pre> | no |
+| leaf\_profile | Create Leaf Profile. | <pre>map(object({<br>    annotation              = optional(string)<br>    description             = optional(string)<br>    name                    = optional(string)<br>    name_alias              = optional(string)<br>    node_block_from         = optional(number)<br>    node_block_name         = optional(string)<br>    node_block_to           = optional(number)<br>    leaf_selector_name      = optional(string)<br>    leaf_interface_profile  = optional(string)<br>    switch_association_type = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "leaf_interface_profile": "",<br>    "leaf_selector_name": "leaf201",<br>    "name": "default",<br>    "name_alias": "",<br>    "node_block_from": 201,<br>    "node_block_name": "blk1",<br>    "node_block_to": 201,<br>    "switch_association_type": "range"<br>  }<br>}</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| leaf\_profile | n/a |
+| leaf\_profile | Leaf Profile ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -55,5 +55,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| leaf\_interface\_profile | n/a |
+| leaf\_interface\_profile | This output will provide the Leaf Interface Profile ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

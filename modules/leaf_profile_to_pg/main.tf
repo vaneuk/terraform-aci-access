@@ -1,9 +1,10 @@
 /*
 API Information:
  - Class: "infraLeafS"
+ - Class: "infraRsAccNodePGrp"
  - Distinguished Name: "uni/infra/nprof-{name}/leaves-{name}-typ-range"
 GUI Location:
- - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {name}: Leaf Selectors Policy Group: default
+ - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {name}: Leaf Selectors Policy Group: {name}
 */
 resource "aci_rest" "leaf_profile_policy_group" {
   for_each   = local.leaf_profile_policy_group
@@ -19,7 +20,7 @@ resource "aci_rest" "leaf_profile_policy_group" {
       {
         "infraRsAccNodePGrp": {
           "attributes": {
-            "tDn": "${each.value["relation_leaf_policy_group"]}"
+            "tDn": "${each.value["leaf_policy_group"]}"
           },
           "children": []
         }

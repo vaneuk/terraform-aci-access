@@ -65,6 +65,6 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| layer3 | n/a |
-| physical | n/a |
+| layer3 | This output will provide the Layer 3 Domain ID |
+| physical | This output will provide the Physical Domain ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

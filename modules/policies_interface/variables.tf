@@ -51,7 +51,7 @@ variable "fc_interface" {
 }
 
 variable "l2_interface" {
-  description = "Create LACP Interface Policies."
+  description = "Create L2 Interface Policies.  Components are QnQ, Reflective Relay, and VLAN Scope"
   type = map(object({
     annotation  = optional(string)
     description = optional(string)
@@ -101,7 +101,7 @@ variable "lacp" {
 }
 
 variable "link_level" {
-  description = "Create Fibre-Channel Interface Policies."
+  description = "Create Link Level Interface Policies."
   type = map(object({
     annotation    = optional(string)
     auto_neg      = optional(string)
@@ -169,7 +169,7 @@ variable "mcp" {
 }
 
 variable "port_security" {
-  description = "Create Mis-Cabling Protocol Policies."
+  description = "Create Port Security Policies."
   type = map(object({
     annotation  = optional(string)
     description = optional(string)
@@ -243,7 +243,7 @@ locals {
     for k, v in var.l2_interface : k => {
       annotation  = (v.annotation != null ? v.annotation : "")
       description = (v.description != null ? v.description : "")
-      name        = coalesce(v.name, "lacp_active")
+      name        = coalesce(v.name, "default")
       name_alias  = (v.name_alias != null ? v.name_alias : "")
       qinq        = coalesce(v.qinq, "disabled")
       vepa        = coalesce(v.vepa, "disabled")

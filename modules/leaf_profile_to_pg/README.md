@@ -1,39 +1,26 @@
-# interface_policy_groups - ACI Interface Policy Groups Terraform Module
+# leaf_profile_to_pg - ACI Leaf Policy Group to Leaf Profile Terraform Module
 
 ## Usage
 
 ```hcl
-module "interface_policy_groups" {
+module "leaf_profile_to_pg" {
 
-  source = "terraform-aci-access//modules/interface_policy_groups"
+  source = "terraform-aci-access//modules/leaf_profile_to_pg"
 
   # omitted...
 }
 ```
 
-This module will Add NTP Servers to the default Date and Time Policy.
+This module will add a configured Leaf Policy Group to a Leaf Profile - Leaf Selector.
 
 ## APIC Reference Information
 
 Use the Class or Distinguished Name to verify in the API.
 
-**Access Policy Group:**
-
-* Class: "infraAccPortGrp"
-* Distinguished Name: "uni/infra/funcprof/accportgrp-{Name}"
-* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > Leaf Access Port > {Name}
-
-**Breakout Policy Group:**
-
-* Class: "infraBrkoutPortGrp"
-* Distinguished Name: "uni/infra/funcprof/brkoutportgrp-{Name}"
-* GUI Location: Fabric > Access Policies > Interface > Leaf Interfaces > Policy Groups > Leaf Breakout Port Group:{Name}
-
-**Bundle [port-channel|vpc] Policy Group:**
-
-* Class: "infraAccBndlGrp"
-* Distinguished Name: "uni/infra/funcprof/accbundle-{Name}"
-* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > [PC or VPC] Interface > {Name}
+* Class: "infraLeafS"
+* Class: "infraRsAccNodePGrp"
+* Distinguished Name: "uni/infra/nprof-{name}/leaves-{name}-typ-range"
+* GUI Location: Fabric > Access Policies > Switches > Leaf Switches > Profiles > {name}: Leaf Selectors Policy Group: {name}
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -63,7 +50,7 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| leaf\_profile\_policy\_group | Assign Leaf Policy Group to | <pre>map(object({<br>    annotation                   = optional(string)<br>    description                  = optional(string)<br>    name                         = optional(string)<br>    name_alias                   = optional(string)<br>    node_block_from              = optional(string)<br>    node_block_name              = optional(string)<br>    node_block_to                = optional(string)<br>    leaf_selector_name           = optional(string)<br>    relation_infra_rs_acc_port_p = optional(string)<br>    switch_association_type      = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation": "",<br>    "description": "",<br>    "leaf_selector_name": "leaf201",<br>    "name": "default",<br>    "name_alias": "",<br>    "node_block_from": "201",<br>    "node_block_name": "blk1",<br>    "node_block_to": "201",<br>    "relation_infra_rs_acc_port_p": "",<br>    "relation_leaf_policy_group": "",<br>    "switch_association_type": "range"<br>  }<br>}</pre> | no |
+| leaf\_profile\_policy\_group | Assign Leaf Policy Group to | <pre>map(object({<br>    leaf_policy_group       = optional(string)<br>    leaf_profile_name       = optional(string)<br>    leaf_selector_name      = optional(string)<br>    switch_association_type = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "leaf_policy_group": "",<br>    "leaf_profile_name": "leaf201",<br>    "leaf_selector_name": "leaf201",<br>    "switch_association_type": "range"<br>  }<br>}</pre> | no |
 
 ## Outputs
 

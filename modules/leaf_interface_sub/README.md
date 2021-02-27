@@ -71,5 +71,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| vlan\_pool\_id | n/a |
+| leaf\_interface\_sub | This output will provide the Leaf Sub Interface Profile ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

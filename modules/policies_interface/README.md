@@ -121,13 +121,13 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| cdp | CDP Policy ID |
-| fc\_interface | Fibre Channel Interface Policy ID |
-| l2\_interface | L2 Interface Policy ID |
-| lacp | LACP Policy ID |
-| link\_level | Link Level Policy ID |
-| lldp | LLDP Policy ID |
-| mcp | Miscabling Protocol Policy ID |
-| port\_security | Port Security Policy ID |
-| stp | Spanning Tree Policy ID |
+| cdp | This output will provide the CDP Policy ID. |
+| fc\_interface | This output will provide the Fibre Channel Interface Policy ID. |
+| l2\_interface | This output will provide the L2 Interface Policy ID. |
+| lacp | This output will provide the LACP Policy ID. |
+| link\_level | This output will provide the Link Level Policy ID. |
+| lldp | This output will provide the LLDP Policy ID. |
+| mcp | This output will provide the Miscabling Protocol Policy ID. |
+| port\_security | This output will provide the Port Security Policy ID. |
+| stp | This output will provide the Spanning Tree Policy ID. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

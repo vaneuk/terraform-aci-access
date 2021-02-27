@@ -55,5 +55,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| membership | This output will provide the Inventory Membership ID |
+| membership | This output will provide the Inventory Membership ID. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

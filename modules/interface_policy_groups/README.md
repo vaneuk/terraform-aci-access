@@ -73,7 +73,7 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| access | This output will provide the Leaf Access Port Policy Group ID |
-| breakout | This output will provide the Breakout Policy Group ID |
-| bundle | This output will provide the Leaf Bundle (port-channel\|vpc) Port Policy Group ID |
+| access | This output will provide the Leaf Access Port Policy Group ID. |
+| breakout | This output will provide the Breakout Policy Group ID. |
+| bundle | This output will provide the Leaf Bundle (port-channel\|vpc) Port Policy Group ID. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

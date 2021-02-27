@@ -55,5 +55,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| leaf\_profile | Leaf Profile ID |
+| leaf\_profile | Leaf Profile ID. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

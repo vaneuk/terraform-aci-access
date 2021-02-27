@@ -11,29 +11,15 @@ module "interface_policy_groups" {
 }
 ```
 
-This module will Add NTP Servers to the default Date and Time Policy.
+This module will Create Attachable Access Entity Profiles.
 
 ## APIC Reference Information
 
 Use the Class or Distinguished Name to verify in the API.
 
-**Access Policy Group:**
-
-* Class: "infraAccPortGrp"
-* Distinguished Name: "uni/infra/funcprof/accportgrp-{Name}"
-* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > Leaf Access Port > {Name}
-
-**Breakout Policy Group:**
-
-* Class: "infraBrkoutPortGrp"
-* Distinguished Name: "uni/infra/funcprof/brkoutportgrp-{Name}"
-* GUI Location: Fabric > Access Policies > Interface > Leaf Interfaces > Policy Groups > Leaf Breakout Port Group:{Name}
-
-**Bundle [port-channel|vpc] Policy Group:**
-
-* Class: "infraAccBndlGrp"
-* Distinguished Name: "uni/infra/funcprof/accbundle-{Name}"
-* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > [PC or VPC] Interface > {Name}
+* Class: "infraAttEntityP"
+* Distinguished Name: "uni/infra/attentp-{Policy Name}"
+* GUI Location: Fabric > Access Policies > Policies > Global > Attachable Access Entity Profiles : {Policy Name}
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -69,5 +55,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| aaep | n/a |
+| aaep | This output will provide the Attachable Access Entity Profile ID. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

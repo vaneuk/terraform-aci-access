@@ -86,19 +86,21 @@ module "intf_policies" {
   #-------------------------------------------------------------------------------------------------------------------
   lacp = {
     "lacp_active" = {
-      # ctrl          = "\"graceful-conv\", \"load-defer\", \"susp-individual\"" is already the default
+      ctrl        = ["susp-individual", "load-defer", "graceful-conv"]
       description = "LACP Default Active Policy" # There is no default description
-      # max_links     = 16 is already the default
-      # min_links     = 1 is already the default
-      # name          = "lacp_active" is already the default
-      # mode          = "active" is already the default
+      # max_links   = 16 is already the default
+      # min_links   = 1 is already the default
+      # name        = "lacp_active" is already the default
+      # mode        = "active" is already the default
     }
     "lacp_mac_pin" = {
+      ctrl        = ["susp-individual", "load-defer", "graceful-conv"]
       description = "LACP Default MAC PIN Policy"
       name        = "lacp_mac_pin"
       mode        = "mac-pin"
     }
     "lacp_mac_pin_nicload" = {
+      ctrl        = ["susp-individual", "load-defer", "graceful-conv"]
       description = "LACP Default MAC Pin Nic Load Policy"
       name        = "lacp_mac_pin_nicload"
       mode        = "mac-pin"
@@ -119,7 +121,7 @@ module "intf_policies" {
     "inherit_noneg" = {
       auto_neg    = "off"
       description = "inherit no-negotiate Link Level Policy"
-      name        = "inherit_auto"
+      name        = "inherit_noneg"
     }
     "1g_auto" = {
       description = "10G auto negotiation Link Level Policy"
@@ -173,12 +175,12 @@ module "intf_policies" {
     "lldp_rx_enabled" = {
       admin_tx_st = "disabled"
       description = "Policy to enable RX of the LLDP Protocol"
-      name        = "lldp_tx_enabled"
+      name        = "lldp_rx_enabled"
     }
     "lldp_tx_enabled" = {
       admin_rx_st = "disabled"
       description = "Policy to enable TX of the LLDP Protocol"
-      name        = "lldp_both_disabled"
+      name        = "lldp_tx_enabled"
     }
   }
 

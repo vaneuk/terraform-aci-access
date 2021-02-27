@@ -5,12 +5,12 @@
 /*
 API Information:
  - Class: "infraSpineAccNodePGrp"
- - Distinguished Name: "uni/infra/funcprof/spaccnodepgrp-default"
+ - Distinguished Name: "uni/infra/funcprof/spaccnodepgrp-{name}"
 GUI Location:
- - Fabric > Access Policies > Switches > Spine Switches > Policy Groups: default
+ - Fabric > Access Policies > Switches > Spine Switches > Policy Groups: {name}
 */
 resource "aci_rest" "spine_policy_group" {
-  for_each   = local.spine_policy_Group
+  for_each   = local.spine_policy_group
   path       = "/api/node/mo/uni/infra/funcprof/spaccnodepgrp-${each.value.name}.json"
   class_name = "infraSpineAccNodePGrp"
   payload    = <<EOF
@@ -18,8 +18,8 @@ resource "aci_rest" "spine_policy_group" {
 	"infraSpineAccNodePGrp": {
 		"attributes": {
 			"dn": "uni/infra/funcprof/spaccnodepgrp-${each.value.name}",
-			"name": "${each.value.name}",
-			"descr": "${each.value.description}"
+			"descr": "${each.value.description}",
+			"name": "${each.value.name}"
 		},
 		"children": [
 			{

@@ -26,10 +26,10 @@ locals {
   vlan_pool = {
     for k, v in var.vlan_pool : k => {
       alloc_mode  = coalesce(v.alloc_mode, "static")
-      annotation  = (v.annotation == null ? v.annotation : "")
-      description = (v.description == null ? v.description : "")
+      annotation  = (v.annotation != null ? v.annotation : "")
+      description = (v.description != null ? v.description : "")
       name        = coalesce(v.name, "msite")
-      name_alias  = (v.name_alias == null ? v.name_alias : "")
+      name_alias  = (v.name_alias != null ? v.name_alias : "")
     }
   }
 }

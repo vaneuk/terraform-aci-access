@@ -1,11 +1,11 @@
-# interface_policy_groups - ACI Interface Policy Groups Terraform Module
+# policies_global - Attachable Access Entity Profiles Terraform Module
 
 ## Usage
 
 ```hcl
-module "interface_policy_groups" {
+module "policies_global" {
 
-  source = "terraform-aci-access//modules/interface_policy_groups"
+  source = "terraform-aci-access//modules/policies_global"
 
   # omitted...
 }

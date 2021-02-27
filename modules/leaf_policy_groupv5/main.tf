@@ -18,8 +18,8 @@ resource "aci_rest" "leaf_policy_group" {
   "infraAccNodePGrp": {
     "attributes": {
       "dn": "uni/infra/funcprof/accnodepgrp-${each.value.name}",
-      "name": "${each.value.name}",
       "descr": "${each.value.description}",
+      "name": "${each.value.name}"
     },
     "children": [
       {

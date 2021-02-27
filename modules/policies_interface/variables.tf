@@ -78,7 +78,7 @@ variable "lacp" {
   description = "Create LACP Interface Policies."
   type = map(object({
     annotation  = optional(string)
-    ctrl        = optional(string)
+    ctrl        = optional(list(string))
     description = optional(string)
     max_links   = optional(number)
     min_links   = optional(number)
@@ -89,7 +89,7 @@ variable "lacp" {
   default = {
     default = {
       annotation  = ""
-      ctrl        = "\"graceful-conv\", \"load-defer\", \"susp-individual\"" # This is a list.  Options are (\"graceful-conv\"|\"fast-sel-hot-stdby\"|\"load-defer\"|\"susp-individual\"|\"symmetric-hash\")
+      ctrl        = ["susp-individual", "load-defer", "graceful-conv"] # This is a list.  Options are (\"graceful-conv\"|\"fast-sel-hot-stdby\"|\"load-defer\"|\"susp-individual\"|\"symmetric-hash\")
       description = ""
       max_links   = 16 # Range is 1-16
       min_links   = 1  # Range is 1-16
@@ -253,8 +253,9 @@ locals {
 
   lacp = {
     for k, v in var.lacp : k => {
-      annotation  = (v.annotation != null ? v.annotation : "")
-      ctrl        = coalesce(v.ctrl, "\"graceful-conv\", \"load-defer\", \"susp-individual\"")
+      annotation = (v.annotation != null ? v.annotation : "")
+      ctrl       = "[${join(", ", [for s in v.ctrl : format("%q", s)])}]"
+      # ctrl        = "[${join(", ", [for s in v.ctrl : format("%q", s)])}]"
       description = (v.description != null ? v.description : "")
       max_links   = coalesce(v.max_links, 16)
       min_links   = coalesce(v.min_links, 1)

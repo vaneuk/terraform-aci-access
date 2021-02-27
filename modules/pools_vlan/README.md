@@ -1,11 +1,11 @@
-# interface_policy_groups - ACI Interface Policy Groups Terraform Module
+# pools_vlan - ACI VLAN Pools Terraform Module
 
 ## Usage
 
 ```hcl
-module "interface_policy_groups" {
+module "pools_vlan" {
 
-  source = "terraform-aci-access//modules/interface_policy_groups"
+  source = "terraform-aci-access//modules/pools_vlan"
 
   # omitted...
 }

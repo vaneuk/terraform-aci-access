@@ -2,10 +2,9 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
-variable "vlan_pool" {
-  description = "Create a VLAN Pool"
+variable "spine_interface_profile" {
+  description = "Create Spine Interface Profile."
   type = map(object({
-    alloc_mode  = optional(string)
     annotation  = optional(string)
     description = optional(string)
     name        = optional(string)
@@ -13,23 +12,23 @@ variable "vlan_pool" {
   }))
   default = {
     default = {
-      alloc_mode  = "static"
       annotation  = ""
       description = ""
-      name        = "access"
+      name        = "spine101" # Spine Interface Profile Name
       name_alias  = ""
     }
   }
 }
 
 locals {
-  vlan_pool = {
-    for k, v in var.vlan_pool : k => {
-      alloc_mode  = coalesce(v.alloc_mode, "static")
+
+  spine_interface_profile = {
+    for k, v in var.spine_interface_profile : k => {
       annotation  = (v.annotation != null ? v.annotation : "")
       description = (v.description != null ? v.description : "")
-      name        = coalesce(v.name, "access")
+      name        = coalesce(v.name, "spine101")
       name_alias  = (v.name_alias != null ? v.name_alias : "")
     }
   }
+
 }

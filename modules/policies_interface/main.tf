@@ -78,7 +78,7 @@ GUI Location:
 resource "aci_lacp_policy" "lacp" {
   for_each   = local.lacp
   annotation = each.value["annotation"]
-  # ctrl        = [each.value["ctrl"]] - submitted a bug.  This needs to be fixed.
+  # ctrl        = each.value["ctrl"]
   description = each.value["description"]
   max_links   = each.value["max_links"]
   min_links   = each.value["min_links"]

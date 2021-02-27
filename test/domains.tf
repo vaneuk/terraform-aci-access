@@ -5,17 +5,21 @@
 module "domains" {
   depends_on = [module.vlan_pools]
   source     = "../modules/domains"
+
+  #-------------------------------------------------------------------------------------------------------------------
   layer3_domain = {
     "l3out" = {
       description = "L3Out Domain Policy"
-      # name        = "l3out" is already the default
+      # name        = "l3out" is already the default name
       vlan_pool = module.vlan_pools.vlan_pool["l3out"]
     }
   }
+
+  #-------------------------------------------------------------------------------------------------------------------
   physical_domain = {
     "access" = {
       description = "Access Domain Policy"
-      # name        = "access" is already the default
+      # name        = "access" is already the default name
       vlan_pool = module.vlan_pools.vlan_pool["access"]
     }
   }

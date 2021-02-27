@@ -56,7 +56,7 @@ locals {
       cdp_policy        = coalesce(v.cdp_policy, "default")
       copp_pre_filter   = coalesce(v.copp_pre_filter, "default")
       copp_leaf_plcy    = coalesce(v.copp_leaf_plcy, "default")
-      description       = (v.description == null ? v.description : "")
+      description       = (v.description != null ? v.description : "")
       fc_node_policy    = coalesce(v.fc_node_policy, "default")
       fc_san_policy     = coalesce(v.fc_san_policy, "default")
       fast_link_plcy    = coalesce(v.fast_link_plcy, "default")

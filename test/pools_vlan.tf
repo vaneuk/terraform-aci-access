@@ -10,7 +10,7 @@ module "vlan_pools" {
     },
     "l3out" = {
       description = "L3Out VLAN Pool"
-      name_alias  = "l3out"
+      name        = "l3out"
     },
     "vmm_dynamic" = {
       alloc_mode  = "dynamic"

@@ -86,21 +86,21 @@ module "intf_policies" {
   #-------------------------------------------------------------------------------------------------------------------
   lacp = {
     "lacp_active" = {
-      ctrl        = ["susp-individual", "load-defer", "graceful-conv"]
-      description = "LACP Default Active Policy" # There is no default description
+      ctrl        = ["fast-sel-hot-stdby", "graceful-conv", "susp-individual"] # This is already the default
+      description = "LACP Default Active Policy"                               # There is no default description
       # max_links   = 16 is already the default
       # min_links   = 1 is already the default
       # name        = "lacp_active" is already the default
       # mode        = "active" is already the default
     }
     "lacp_mac_pin" = {
-      ctrl        = ["susp-individual", "load-defer", "graceful-conv"]
+      # ctrl        = ["fast-sel-hot-stdby", "graceful-conv", "susp-individual"] # This is already the default
       description = "LACP Default MAC PIN Policy"
       name        = "lacp_mac_pin"
       mode        = "mac-pin"
     }
     "lacp_mac_pin_nicload" = {
-      ctrl        = ["susp-individual", "load-defer", "graceful-conv"]
+      # ctrl        = ["fast-sel-hot-stdby", "graceful-conv", "susp-individual"] # This is already the default
       description = "LACP Default MAC Pin Nic Load Policy"
       name        = "lacp_mac_pin_nicload"
       mode        = "mac-pin"

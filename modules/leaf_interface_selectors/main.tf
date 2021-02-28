@@ -5,12 +5,12 @@
 /*
 API Information:
  - Class: "infraHPortS"
- - Distinguished Name: " uni/infra/accportprof-{leaf_name}/hports-{interface_selector}-typ-{selector_type}"
+ - Distinguished Name: "uni/infra/accportprof-{leaf_name}/hports-{interface_selector}-typ-{selector_type}"
 GUI Location:
  - Fabric > Access Policies > Interfaces > Leaf Interfaces > Profiles > {leaf_name}:{interface_selector}
 */
-resource "aci_access_port_selector" "interface_selectors" {
-  for_each = local.interface_selectors
+resource "aci_access_port_selector" "leaf_interface_selectors" {
+  for_each = local.leaf_interface_selectors
   # depends_on                      = [aci_leaf_interface_profile.default]
   leaf_interface_profile_dn      = each.value["leaf_profile"]
   annotation                     = each.value["annotation"]

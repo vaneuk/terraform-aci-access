@@ -1,39 +1,25 @@
-# interface_policy_groups - ACI Interface Policy Groups Terraform Module
+# spine_interface_selector - ACI Spine Interface Selectors Terraform Module
 
 ## Usage
 
 ```hcl
-module "interface_policy_groups" {
+module "spine_interface_selector" {
 
-  source = "terraform-aci-access//modules/interface_policy_groups"
+  source = "terraform-aci-access//modules/spine_interface_selector"
 
   # omitted...
 }
 ```
 
-This module will Add NTP Servers to the default Date and Time Policy.
+This module will Create Spine Interface Selectors for a Spine Interface Profile.
 
 ## APIC Reference Information
 
 Use the Class or Distinguished Name to verify in the API.
 
-**Access Policy Group:**
-
-* Class: "infraAccPortGrp"
-* Distinguished Name: "uni/infra/funcprof/accportgrp-{Name}"
-* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > Leaf Access Port > {Name}
-
-**Breakout Policy Group:**
-
-* Class: "infraBrkoutPortGrp"
-* Distinguished Name: "uni/infra/funcprof/brkoutportgrp-{Name}"
-* GUI Location: Fabric > Access Policies > Interface > Leaf Interfaces > Policy Groups > Leaf Breakout Port Group:{Name}
-
-**Bundle [port-channel|vpc] Policy Group:**
-
-* Class: "infraAccBndlGrp"
-* Distinguished Name: "uni/infra/funcprof/accbundle-{Name}"
-* GUI Location: Fabric > Interfaces > Leaf Interfaces > Policy Groups > [PC or VPC] Interface > {Name}
+* Class: "infraSHPortS"
+* Distinguished Name: "uni/infra/spaccportprof-{name}/shports-{interface_selector}-typ-range"
+* GUI Location: Fabric > Access Policies > Interfaces > Spine Interfaces > Profiles > {Spine Interface Profile}:{Spine Interface Selector}
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -63,11 +49,11 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| vlan\_pool | Create a VLAN Pool | <pre>map(object({<br>    alloc_mode  = optional(string)<br>    annotation  = optional(string)<br>    description = optional(string)<br>    name        = optional(string)<br>    name_alias  = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "alloc_mode": "static",<br>    "annotation": "",<br>    "description": "",<br>    "name": "msite",<br>    "name_alias": ""<br>  }<br>}</pre> | no |
+| spine\_interface\_selectors | Create a Spine Interface Selector | <pre>map(object({<br>    annotation_block    = optional(string)<br>    annotation_selector = optional(string)<br>    descr_block         = optional(string)<br>    descr_selector      = optional(string)<br>    module_from         = optional(number)<br>    module_to           = optional(number)<br>    name_block          = optional(string)<br>    name_selector       = optional(string)<br>    name_alias_block    = optional(string)<br>    name_alias_selector = optional(string)<br>    policy_group        = optional(string)<br>    port_from           = optional(number)<br>    port_to             = optional(number)<br>    selector_type       = optional(string)<br>    spine_profile       = optional(string)<br>  }))</pre> | <pre>{<br>  "default": {<br>    "annotation_block": "",<br>    "annotation_selector": "",<br>    "descr_block": "",<br>    "descr_selector": "",<br>    "module_from": 1,<br>    "module_to": 1,<br>    "name_alias_block": "",<br>    "name_alias_selector": "",<br>    "name_block": "=same as name_selector",<br>    "name_selector": "Eth1-01",<br>    "policy_group": "",<br>    "port_from": 1,<br>    "port_to": 1,<br>    "selector_type": "range",<br>    "spine_profile": ""<br>  }<br>}</pre> | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| vlan\_pool\_id | n/a |
+| spine\_interface\_selectors | This output will provide the Spine Interface Selector ID. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -21,11 +21,11 @@ variable "port_block" {
       description        = ""
       interface_selector = ""
       module_from        = 1
-      module_to          = 1
+      module_to          = 1 # The default value is the same as module_from.
       name               = "Eth1-1"
       name_alias         = ""
       port_from          = 1
-      port_to            = 1
+      port_to            = 1 # The default value is the same as port_from.
     }
   }
 }
@@ -37,11 +37,11 @@ locals {
       description        = (v.description != null ? v.description : "")
       interface_selector = (v.interface_selector != null ? v.interface_selector : "")
       module_from        = coalesce(v.module_from, 1)
-      module_to          = coalesce(v.module_to, 1)
+      module_to          = coalesce(v.module_to, v.module_from, 1)
       name               = coalesce(v.name, "Eth1-1")
       name_alias         = (v.name_alias != null ? v.name_alias : "")
       port_from          = coalesce(v.port_from, 1)
-      port_to            = coalesce(v.port_to, 1)
+      port_to            = coalesce(v.port_to, v.port_from, 1)
     }
   }
 }

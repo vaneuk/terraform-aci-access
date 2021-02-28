@@ -1,6 +1,6 @@
-#=============================
-#  Domains
-#=============================
+#---------------------------------
+#  Create Layer3/Physical Domains
+#---------------------------------
 
 module "domains" {
   depends_on = [module.vlan_pools]

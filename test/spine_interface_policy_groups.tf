@@ -8,7 +8,7 @@ module "spine_interface_policy_groups" {
 
   #-------------------------------------------------------------------------------------------------------------------
   spine_port = {
-    "access" = {
+    "msite" = {
       # Anything not defined I am accepting the default values.
       description         = "Acess Port Policy Group."
       name                = "msite"

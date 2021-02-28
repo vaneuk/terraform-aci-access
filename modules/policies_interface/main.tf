@@ -76,9 +76,9 @@ GUI Location:
  - Fabric > Access Policies > Policies > Interface > Port Channel : {Policy Name}
 */
 resource "aci_lacp_policy" "lacp" {
-  for_each   = local.lacp
-  annotation = each.value["annotation"]
-  # ctrl        = each.value["ctrl"]
+  for_each    = local.lacp
+  annotation  = each.value["annotation"]
+  ctrl        = each.value["ctrl"]
   description = each.value["description"]
   max_links   = each.value["max_links"]
   min_links   = each.value["min_links"]

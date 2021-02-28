@@ -67,103 +67,35 @@ module "dc1-spine101_spine_profile_sw_assoc" {
   }
 }
 
-# module "dc1-spine101_interface_selectors" {
-#   source     = "../modules/spine_interface_selectors"
-#   depends_on = [module.interface_policy_groups,module.dc1-spine101_interface_profile]
-#   interface_selectors = {
-#     "Eth1-01" = {
-#       description   = "dc1-spine101 Eth1/1 to endpointxyz"
-#       spine_profile  = module.dc1-spine101_interface_profile.spine_interface_profile["dc1-spine101"]
-#       name          = "Eth1-01"
-#       policy_group  = module.interface_policy_groups.access["access"]
-#       # selector_type = "range" # range is already the default
-#     }
-#     "Eth1-02" = {
-#       description   = "dc1-spine101 Eth1/2 to server"
-#       spine_profile  = module.dc1-spine101_interface_profile.spine_interface_profile["dc1-spine101"]
-#       name          = "Eth1-02"
-#       policy_group  = module.interface_policy_groups.bundle["server_vpc"]
-#       # selector_type = "range" # range is already the default
-#     }
-#     "Eth1-49" = {
-#       description   = "dc1-spine101 Eth1/49 Breakout Port"
-#       spine_profile  = module.dc1-spine101_interface_profile.spine_interface_profile["dc1-spine101"]
-#       name          = "Eth1-49"
-#       policy_group  = module.interface_policy_groups.breakout["25g-4x"]
-#       # selector_type = "range" # range is already the default
-#     }
-#     "Eth1-49-1" = {
-#       description   = "dc1-spine101 Eth1/49 Breakout Port"
-#       spine_profile  = module.dc1-spine101_interface_profile.spine_interface_profile["dc1-spine101"]
-#       name          = "Eth1-49-1"
-#       policy_group  = module.interface_policy_groups.access["access"]
-#       # selector_type = "range" # range is already the default
-#     }
-#     "Eth1-49-2" = {
-#       description   = "dc1-spine101 Eth1/49 Breakout Port"
-#       spine_profile  = module.dc1-spine101_interface_profile.spine_interface_profile["dc1-spine101"]
-#       name          = "Eth1-49-2"
-#       policy_group  = module.interface_policy_groups.bundle["server_vpc"]
-#       # selector_type = "range" # range is already the default
-#     }
-#   }
-# }
-#
-# output "dc1-spine101_interface_selectors" {
-#   value = { for v in sort(keys(module.dc1-spine101_interface_selectors)) : v => module.dc1-spine101_interface_selectors[v] }
-# }
+module "dc1-spine101_interface_selectors" {
+  source     = "../modules/spine_interface_selectors"
+  depends_on = [module.spine_interface_policy_groups, module.dc1-spine101_interface_profile]
+  spine_interface_selectors = {
+    "Eth1-01" = {
+      description   = "dc1-spine101 Eth1/1 to endpointxyz"
+      spine_profile = module.dc1-spine101_interface_profile.spine_interface_profile["dc1-spine101"]
+      name_selector = "Eth1-01"
+      # name_block    = "Eth1-01" # As long as the name_block is the same as the name_selector this can be ignored
+      policy_group = module.spine_interface_policy_groups.spine_port["msite"]
+      # selector_type = "range" # range is already the default
+      # module_from   = 1  # Module 1 is already the default
+      # module_to     = 1  # If the module_to is the same as the module_from you can leave this blank
+      # port_from     = 1  # Port 1 is already the default
+      # port_to       = 1  # If the port_to is the same as the port_from you can leave this blank
+    }
+    "Eth1-02" = {
+      description   = "dc1-spine101 Eth1/2 to server"
+      spine_profile = module.dc1-spine101_interface_profile.spine_interface_profile["dc1-spine101"]
+      name          = "Eth1-02"
+      policy_group  = module.spine_interface_policy_groups.spine_port["msite"]
+      # selector_type = "range" # range is already the default
+      # module_from   = 1  # Module 1 is already the default
+      port_from = 2
+      # port_to       = 2  # If the port_to is the same as the port_from you can leave this blank
+    }
+  }
+}
 
-# module "dc1-spine101_interface_blocks" {
-#   source     = "../modules/spine_interface_selectors_block"
-#   depends_on = [module.dc1-spine101_interface_selectors]
-#   port_block = {
-#     "Eth1-01" = {
-#       description         = "Connection to endpointxyz"
-#       interface_selector  = module.dc1-spine101_interface_selectors.interface_selectors["Eth1-01"]
-#       name                = "Eth1-01"
-#       # module_from         = 1 # Module 1 is already the default
-#       # module_to           = 1 # Module 1 is already the default
-#       # port_from           = 1 # Port 1 is already the default
-#       # port_to             = 1 # Port 1 is already the default
-#     }
-#     "Eth1-02" = {
-#       description         = "Connection to server1"
-#       interface_selector  = module.dc1-spine101_interface_selectors.interface_selectors["Eth1-02"]
-#       name                = "Eth1-02"
-#       port_from           = 2
-#       port_to             = 2
-#     }
-#     "Eth1-49" = {
-#       description         = "Breakout Port 1/49"
-#       interface_selector  = module.dc1-spine101_interface_selectors.interface_selectors["Eth1-49"]
-#       name                = "Eth1-49"
-#       port_from           = 49
-#       port_to             = 49
-#     }
-#   }
-# }
-#
-# module "dc1-spine101_interface_sub_blocks" {
-#   source     = "../modules/spine_interface_selectors_block_sub"
-#   depends_on = [module.dc1-spine101_interface_selectors]
-#   port_block_sub = {
-#     "Eth1-49-1" = {
-#       description         = "Connection to endpointzyx"
-#       interface_selector  = module.dc1-spine101_interface_selectors.interface_selectors["Eth1-49-1"]
-#       name                = "Eth1-49-1"
-#       port_from           = 49
-#       port_to             = 49
-#       # sub_port_from       = 1 # Sub-port 1 is already the default
-#       # sub_port_to         = 1 # Sub-port 1 is already the default
-#     }
-#     "Eth1-49-2" = {
-#       description         = "Connection to endpointzyx"
-#       interface_selector  = module.dc1-spine101_interface_selectors.interface_selectors["Eth1-49-2"]
-#       name                = "Eth1-49-2"
-#       port_from           = 49
-#       port_to             = 49
-#       sub_port_from       = 2
-#       sub_port_to         = 2
-#     }
-#   }
-# }
+output "dc1-spine101_interface_selectors" {
+  value = { for v in sort(keys(module.dc1-spine101_interface_selectors)) : v => module.dc1-spine101_interface_selectors[v] }
+}

@@ -1,7 +1,7 @@
 /*
 API Information:
  - Class: "infraLeafS"
- - Distinguished Name: " uni/infra/nprof-{Name}"
+ - Distinguished Name: "uni/infra/nprof-{Name}"
 GUI Location:
  - Fabric > Access Policies > Switches > Leaf Switches > Profiles > {Name}
 */

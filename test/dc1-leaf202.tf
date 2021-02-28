@@ -68,7 +68,7 @@ module "dc1-leaf202_policy_group" {
 module "dc1-leaf202_interface_selectors" {
   source     = "../modules/leaf_interface_selectors"
   depends_on = [module.leaf_interface_policy_groups, module.dc1-leaf202_interface_profile]
-  interface_selectors = {
+  leaf_interface_selectors = {
     "Eth1-01" = {
       description  = "dc1-leaf202 Eth1/1 to endpointxyz"
       leaf_profile = module.dc1-leaf202_interface_profile.leaf_interface_profile["dc1-leaf202"]
@@ -116,27 +116,27 @@ module "dc1-leaf202_interface_blocks" {
   depends_on = [module.dc1-leaf202_interface_selectors]
   port_block = {
     "Eth1-01" = {
-      description        = "Connection to endpointxyz"
-      interface_selector = module.dc1-leaf202_interface_selectors.interface_selectors["Eth1-01"]
+      description        = "Connection to endpointxyz" # This is what you will see on a "show interface status"
+      interface_selector = module.dc1-leaf202_interface_selectors.leaf_interface_selectors["Eth1-01"]
       name               = "Eth1-01"
-      # module_from         = 1 # Module 1 is already the default
-      # module_to           = 1 # Module 1 is already the default
-      # port_from           = 1 # Port 1 is already the default
-      # port_to             = 1 # Port 1 is already the default
+      # module_from        = 1  # Module 1 is already the default
+      # module_to          = 1  # If the module_to is the same as the module_from you can leave this blank
+      # port_from          = 1  # Port 1 is already the default
+      # port_to            = 1  # If the port_to is the same as the port_from you can leave this blank
     }
     "Eth1-02" = {
-      description        = "Connection to server1"
-      interface_selector = module.dc1-leaf202_interface_selectors.interface_selectors["Eth1-02"]
+      description        = "Connection to server1" # This is what you will see on a "show interface status"
+      interface_selector = module.dc1-leaf202_interface_selectors.leaf_interface_selectors["Eth1-02"]
       name               = "Eth1-02"
       port_from          = 2
-      port_to            = 2
+      # port_to            = 2  # If the port_to is the same as the port_from you can leave this blank
     }
     "Eth1-49" = {
-      description        = "Breakout Port 1/49"
-      interface_selector = module.dc1-leaf202_interface_selectors.interface_selectors["Eth1-49"]
+      description        = "Breakout Port 1/49" # This is what you will see on a "show interface status"
+      interface_selector = module.dc1-leaf202_interface_selectors.leaf_interface_selectors["Eth1-49"]
       name               = "Eth1-49"
       port_from          = 49
-      port_to            = 49
+      # port_to            = 49 # If the port_to is the same as the port_from you can leave this blank
     }
   }
 }
@@ -146,22 +146,24 @@ module "dc1-leaf202_interface_sub_blocks" {
   depends_on = [module.dc1-leaf202_interface_selectors]
   port_block_sub = {
     "Eth1-49-1" = {
-      description        = "Connection to endpointzyx"
-      interface_selector = module.dc1-leaf202_interface_selectors.interface_selectors["Eth1-49-1"]
-      name               = "Eth1-49-1"
-      port_from          = 49
-      port_to            = 49
+      description        = "Connection to endpointzyx" # This is what you will see on a "show interface status"
+      interface_selector = module.dc1-leaf202_interface_selectors.leaf_interface_selectors["Eth1-49-1"]
+      # module_from        = 1  # Module 1 is already the default
+      # module_to          = 1  # If the module_to is the same as the module_from you can leave this blank
+      name      = "Eth1-49-1"
+      port_from = 49
+      # port_to            = 49 # If the port_to is the same as the port_from you can leave this blank
       # sub_port_from       = 1 # Sub-port 1 is already the default
       # sub_port_to         = 1 # Sub-port 1 is already the default
     }
     "Eth1-49-2" = {
-      description        = "Connection to endpointzyx"
-      interface_selector = module.dc1-leaf202_interface_selectors.interface_selectors["Eth1-49-2"]
+      description        = "Connection to endpointzyx" # This is what you will see on a "show interface status"
+      interface_selector = module.dc1-leaf202_interface_selectors.leaf_interface_selectors["Eth1-49-2"]
       name               = "Eth1-49-2"
       port_from          = 49
-      port_to            = 49
-      sub_port_from      = 2
-      sub_port_to        = 2
+      # port_to            = 49 # If the port_to is the same as the port_from you can leave this blank
+      sub_port_from = 2
+      # sub_port_to        = 2  # If the port_to is the same as the port_from you can leave this blank
     }
   }
 }

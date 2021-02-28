@@ -5,7 +5,7 @@
 /*
 API Information:
  - Class: "infraPortBlk"
- - Distinguished Name: " uni/infra/accportprof-{leaf_name}/hports-{interface_selector}-typ-range/portblk-{block_name}"
+ - Distinguished Name: "uni/infra/accportprof-{leaf_name}/hports-{interface_selector}-typ-range/portblk-{block_name}"
 GUI Location:
  - Fabric > Access Policies > Interfaces > Leaf Interfaces > Profiles > {leaf_name}:{interface_selector}
 */

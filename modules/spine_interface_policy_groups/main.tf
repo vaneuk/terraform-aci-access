@@ -5,7 +5,7 @@
 /*
 API Information:
  - Class: "infraSpAccPortGrp"
- - Distinguished Name: " uni/infra/funcprof/spaccportgrp-{Name}"
+ - Distinguished Name: "uni/infra/funcprof/spaccportgrp-{Name}"
 GUI Location:
  - Fabric > Interfaces > Spine Interfaces > Policy Groups > {Name}
 */

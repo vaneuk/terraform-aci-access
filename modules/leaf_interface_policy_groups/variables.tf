@@ -30,8 +30,8 @@ variable "access" {
     relation_qos_dpp       = optional(string)
     relation_qos_pfc       = optional(string)
     relation_slow_drain    = optional(string)
-    relation_span_dest     = optional(string)
-    relation_span_source   = optional(string)
+    relation_span_dest     = optional(list(string))
+    relation_span_source   = optional(list(string))
     relation_storm_ctrl    = optional(string)
     relation_stp           = optional(string)
   }))
@@ -62,8 +62,8 @@ variable "access" {
       relation_qos_dpp       = "uni/infra/qosdpppol-default"
       relation_qos_pfc       = "uni/infra/pfc-default"
       relation_slow_drain    = "uni/infra/qossdpol-default"
-      relation_span_dest     = ""
-      relation_span_source   = ""
+      relation_span_dest     = []
+      relation_span_source   = []
       relation_storm_ctrl    = "uni/infra/stormctrlifp-default"
       relation_stp           = "uni/infra/ifPol-default"
     }
@@ -118,8 +118,8 @@ variable "bundle" {
     relation_qos_dpp       = optional(string)
     relation_qos_pfc       = optional(string)
     relation_slow_drain    = optional(string)
-    relation_span_dest     = optional(string)
-    relation_span_source   = optional(string)
+    relation_span_dest     = optional(list(string))
+    relation_span_source   = optional(list(string))
     relation_storm_ctrl    = optional(string)
     relation_stp           = optional(string)
   }))
@@ -150,8 +150,8 @@ variable "bundle" {
       relation_qos_dpp       = "uni/infra/qosdpppol-default"
       relation_qos_pfc       = "uni/infra/pfc-default"
       relation_slow_drain    = "uni/infra/qossdpol-default"
-      relation_span_dest     = ""
-      relation_span_source   = ""
+      relation_span_dest     = []
+      relation_span_source   = []
       relation_storm_ctrl    = "uni/infra/stormctrlifp-default"
       relation_stp           = "uni/infra/ifPol-default"
     }
@@ -188,8 +188,8 @@ locals {
       relation_qos_dpp       = coalesce(v.relation_qos_dpp, "uni/infra/qosdpppol-default")
       relation_qos_pfc       = coalesce(v.relation_qos_pfc, "uni/infra/pfc-default")
       relation_slow_drain    = coalesce(v.relation_slow_drain, "uni/infra/qossdpol-default")
-      relation_span_dest     = (v.relation_span_dest != null ? v.relation_span_dest : "")
-      relation_span_source   = (v.relation_span_source != null ? v.relation_span_source : "")
+      relation_span_dest     = coalesce(v.relation_span_dest, [])
+      relation_span_source   = coalesce(v.relation_span_source, [])
       relation_storm_ctrl    = coalesce(v.relation_storm_ctrl, "uni/infra/stormctrlifp-default")
       relation_stp           = coalesce(v.relation_stp, "uni/infra/ifPol-default")
     }
@@ -232,8 +232,8 @@ locals {
       relation_qos_dpp       = coalesce(v.relation_qos_dpp, "uni/infra/qosdpppol-default")
       relation_qos_pfc       = coalesce(v.relation_qos_pfc, "uni/infra/pfc-default")
       relation_slow_drain    = coalesce(v.relation_slow_drain, "uni/infra/qossdpol-default")
-      relation_span_dest     = (v.relation_span_dest != null ? v.relation_span_dest : "")
-      relation_span_source   = (v.relation_span_source != null ? v.relation_span_source : "")
+      relation_span_dest     = coalesce(v.relation_span_dest, [])
+      relation_span_source   = coalesce(v.relation_span_source, [])
       relation_storm_ctrl    = coalesce(v.relation_storm_ctrl, "uni/infra/stormctrlifp-default")
       relation_stp           = coalesce(v.relation_stp, "uni/infra/ifPol-default")
     }

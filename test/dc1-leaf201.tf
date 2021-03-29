@@ -25,7 +25,7 @@ module "dc1-leaf201_interface_profile" {
   source = "../modules/leaf_interface_profile"
   leaf_interface_profile = {
     "dc1-leaf201" = {
-      description = "dc1-leaf201 Interface Profile"
+      description = "dc1-leaf201 updated with dte on phone. Interface Profile"
       name        = "dc1-leaf201"
     }
   }

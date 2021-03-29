@@ -29,17 +29,17 @@ resource "aci_leaf_access_port_policy_group" "access" {
   relation_infra_rs_macsec_if_pol        = each.value["relation_macsec_policy"] # class: macsecIfPol        DN: "uni/infra/macsecifp-{Name}"
   relation_infra_rs_mcp_if_pol           = each.value["relation_mcp"]           # class: mcpIfPol           DN: "uni/infra/mcpIfP-{Name}"
   relation_infra_rs_mon_if_infra_pol     = each.value["relation_monitoring"]    # class: monInfraPol        DN: "uni/infra/moninfra-{Name}"
-  # relation_infra_rs_netflow_monitor_pol    = [each.value["relation_netflow"]]     # class: netflowMonitorPol  DN: "uni/infra/monitorpol-{Name}"
-  # relation_infra_rs_poe_if_pol             = [each.value["relation_poe"]]         # class: poeIfPol           DN: "uni/infra/poeIfP-{Name}" **There is no default Policy**
-  relation_infra_rs_qos_dpp_if_pol         = each.value["relation_qos_dpp"]       # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
-  relation_infra_rs_qos_egress_dpp_if_pol  = each.value["relation_egress_dpp"]    # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
-  relation_infra_rs_qos_ingress_dpp_if_pol = each.value["relation_ingress_dpp"]   # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
-  relation_infra_rs_qos_pfc_if_pol         = each.value["relation_qos_pfc"]       # class: qosPfcIfPol        DN: "uni/infra/pfc-{Name}"
-  relation_infra_rs_qos_sd_if_pol          = each.value["relation_slow_drain"]    # class: qosSdIfPol         DN: "uni/infra/qossdpol-{Name}"
-  relation_infra_rs_span_v_dest_grp        = [each.value["relation_span_dest"]]   # class: spanVDestGrp       DN: "uni/infra/vdestgrp-{Name}"
-  relation_infra_rs_span_v_src_grp         = [each.value["relation_span_source"]] # class: spanVSrcGrp        DN: "uni/infra/vsrcgrp-{Name}"
-  relation_infra_rs_stormctrl_if_pol       = each.value["relation_storm_ctrl"]    # class: stormctrlIfPol     DN: "uni/infra/stormctrlifp-{Name}"
-  relation_infra_rs_stp_if_pol             = each.value["relation_stp"]           # class: stpIfPol           DN: "uni/infra/ifPol-{Name}"
+  # relation_infra_rs_netflow_monitor_pol    = [each.value["relation_netflow"]]       # class: netflowMonitorPol  DN: "uni/infra/monitorpol-{Name}"
+  # relation_infra_rs_poe_if_pol             = [each.value["relation_poe"]]           # class: poeIfPol           DN: "uni/infra/poeIfP-{Name}" **There is no default Policy**
+  relation_infra_rs_qos_dpp_if_pol         = each.value["relation_qos_dpp"]     # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
+  relation_infra_rs_qos_egress_dpp_if_pol  = each.value["relation_egress_dpp"]  # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
+  relation_infra_rs_qos_ingress_dpp_if_pol = each.value["relation_ingress_dpp"] # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
+  relation_infra_rs_qos_pfc_if_pol         = each.value["relation_qos_pfc"]     # class: qosPfcIfPol        DN: "uni/infra/pfc-{Name}"
+  relation_infra_rs_qos_sd_if_pol          = each.value["relation_slow_drain"]  # class: qosSdIfPol         DN: "uni/infra/qossdpol-{Name}"
+  relation_infra_rs_span_v_dest_grp        = each.value["relation_span_dest"]   # class: spanVDestGrp       DN: "uni/infra/vdestgrp-{Name}"
+  relation_infra_rs_span_v_src_grp         = each.value["relation_span_source"] # class: spanVSrcGrp        DN: "uni/infra/vsrcgrp-{Name}"
+  relation_infra_rs_stormctrl_if_pol       = each.value["relation_storm_ctrl"]  # class: stormctrlIfPol     DN: "uni/infra/stormctrlifp-{Name}"
+  relation_infra_rs_stp_if_pol             = each.value["relation_stp"]         # class: stpIfPol           DN: "uni/infra/ifPol-{Name}"
 }
 
 #------------------------------------------
@@ -105,14 +105,14 @@ resource "aci_leaf_access_bundle_policy_group" "bundle" {
   relation_infra_rs_macsec_if_pol        = each.value["relation_macsec_policy"] # class: macsecIfPol        DN: "uni/infra/macsecifp-{Name}"
   relation_infra_rs_mcp_if_pol           = each.value["relation_mcp"]           # class: mcpIfPol           DN: "uni/infra/mcpIfP-{Name}"
   relation_infra_rs_mon_if_infra_pol     = each.value["relation_monitoring"]    # class: monInfraPol        DN: "uni/infra/moninfra-{Name}"
-  # relation_infra_rs_netflow_monitor_pol    = [each.value["relation_netflow"]]     # class: netflowMonitorPol  DN: "uni/infra/monitorpol-{Name}"
-  relation_infra_rs_qos_dpp_if_pol         = each.value["relation_qos_dpp"]       # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
-  relation_infra_rs_qos_egress_dpp_if_pol  = each.value["relation_egress_dpp"]    # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
-  relation_infra_rs_qos_ingress_dpp_if_pol = each.value["relation_ingress_dpp"]   # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
-  relation_infra_rs_qos_pfc_if_pol         = each.value["relation_qos_pfc"]       # class: qosPfcIfPol        DN: "uni/infra/pfc-{Name}"
-  relation_infra_rs_qos_sd_if_pol          = each.value["relation_slow_drain"]    # class: qosSdIfPol         DN: "uni/infra/qossdpol-{Name}"
-  relation_infra_rs_span_v_dest_grp        = [each.value["relation_span_dest"]]   # class: spanVDestGrp       DN: "uni/infra/vdestgrp-{Name}" does span make sense here?
-  relation_infra_rs_span_v_src_grp         = [each.value["relation_span_source"]] # class: spanVSrcGrp        DN: "uni/infra/vsrcgrp-{Name}" does span make sense here?
-  relation_infra_rs_stormctrl_if_pol       = each.value["relation_storm_ctrl"]    # class: stormctrlIfPol     DN: "uni/infra/stormctrlifp-{Name}"
-  relation_infra_rs_stp_if_pol             = each.value["relation_stp"]           # class: stpIfPol           DN: "uni/infra/ifPol-{Name}"
+  # relation_infra_rs_netflow_monitor_pol    = [each.value["relation_netflow"]]       # class: netflowMonitorPol  DN: "uni/infra/monitorpol-{Name}"
+  relation_infra_rs_qos_dpp_if_pol         = each.value["relation_qos_dpp"]     # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
+  relation_infra_rs_qos_egress_dpp_if_pol  = each.value["relation_egress_dpp"]  # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
+  relation_infra_rs_qos_ingress_dpp_if_pol = each.value["relation_ingress_dpp"] # class: qosDppPol          DN: "uni/infra/qosdpppol-{Name}"
+  relation_infra_rs_qos_pfc_if_pol         = each.value["relation_qos_pfc"]     # class: qosPfcIfPol        DN: "uni/infra/pfc-{Name}"
+  relation_infra_rs_qos_sd_if_pol          = each.value["relation_slow_drain"]  # class: qosSdIfPol         DN: "uni/infra/qossdpol-{Name}"
+  relation_infra_rs_span_v_dest_grp        = each.value["relation_span_dest"]   # class: spanVDestGrp       DN: "uni/infra/vdestgrp-{Name}" does span make sense here?
+  relation_infra_rs_span_v_src_grp         = each.value["relation_span_source"] # class: spanVSrcGrp        DN: "uni/infra/vsrcgrp-{Name}" does span make sense here?
+  relation_infra_rs_stormctrl_if_pol       = each.value["relation_storm_ctrl"]  # class: stormctrlIfPol     DN: "uni/infra/stormctrlifp-{Name}"
+  relation_infra_rs_stp_if_pol             = each.value["relation_stp"]         # class: stpIfPol           DN: "uni/infra/ifPol-{Name}"
 }

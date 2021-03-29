@@ -1,6 +1,6 @@
-#=======================================
-#  Fabric Interface Policy Groups
-#=======================================
+#---------------------------------------
+#  Interface Policy Groups
+#---------------------------------------
 
 module "leaf_interface_policy_groups" {
   source     = "../modules/leaf_interface_policy_groups"
@@ -26,7 +26,7 @@ module "leaf_interface_policy_groups" {
     "10g-4x" = {} # Everything is already default for this policy.
     "25g-4x" = {
       breakout_map = "25g-4x"
-      description  = "default 4x25G Breakout Policy."
+      description  = "New default 4x25G Breakout Policy."
       name         = "25g-4x"
     }
     "50g-8x" = {

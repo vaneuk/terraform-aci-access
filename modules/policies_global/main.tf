@@ -15,6 +15,6 @@ resource "aci_attachable_access_entity_profile" "aaep" {
   description             = each.value["description"]
   name                    = each.value["name"]
   name_alias              = each.value["name_alias"]
-  relation_infra_rs_dom_p = [each.value["domain"]]
+  relation_infra_rs_dom_p = each.value["domain"]
 }
 

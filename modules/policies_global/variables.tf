@@ -7,7 +7,7 @@ variable "aaep" {
   type = map(object({
     annotation  = optional(string)
     description = optional(string)
-    domain      = optional(string)
+    domain      = optional(list(string))
     name        = optional(string)
     name_alias  = optional(string)
   }))
@@ -15,7 +15,7 @@ variable "aaep" {
     default = {
       annotation  = ""
       description = ""
-      domain      = ""
+      domain      = []
       name        = "access"
       name_alias  = ""
     }
@@ -27,7 +27,7 @@ locals {
     for k, v in var.aaep : k => {
       annotation  = (v.annotation != null ? v.annotation : "")
       description = (v.description != null ? v.description : "")
-      domain      = (v.domain != null ? v.domain : "")
+      domain      = (v.domain != null ? v.domain : [])
       name        = coalesce(v.name, "access")
       name_alias  = (v.name_alias != null ? v.name_alias : "")
     }

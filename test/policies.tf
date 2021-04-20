@@ -9,12 +9,12 @@ module "global_policies" {
   aaep = {
     "access" = {
       description = "access AAEP Policy"
-      domain      = module.domains.layer3["l3out"]
+      domain      = [module.domains.layer3["l3out"]]
       # name        = "access" is already the default
     }
     "l3out" = {
       description = "l3out AAEP Policy"
-      domain      = module.domains.physical["access"]
+      domain      = [module.domains.physical["access"]]
       name        = "l3out"
     }
   }

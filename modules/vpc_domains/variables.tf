@@ -15,7 +15,6 @@ variable "vpc_domains" {
     name_alias_node2         = optional(string)
     node1_id                 = optional(number)
     node2_id                 = optional(number)
-    pod_id                   = optional(number)
     vpc_domain_id            = optional(number)
   }))
   default = {
@@ -30,7 +29,6 @@ variable "vpc_domains" {
       name_alias_node2         = ""
       node1_id                 = 201
       node2_id                 = 202
-      pod_id                   = 1
       vpc_domain_id            = 201
     }
   }
@@ -49,7 +47,6 @@ locals {
       name_alias_node2         = (v.name_alias_node2 != null ? v.name_alias_node2 : "")
       node1_id                 = coalesce(v.node1_id, 201)
       node2_id                 = coalesce(v.node2_id, 202)
-      pod_id                   = coalesce(v.pod_id, 1)
       vpc_domain_id            = coalesce(v.vpc_domain_id, 201)
     }
   }
